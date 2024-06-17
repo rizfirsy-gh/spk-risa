@@ -13,7 +13,7 @@ const DashboardSidebarTitle: React.FC<DashboardItemProps> = ({
   return (
     <div className="flex items-center gap-4 p-8 h-14 border-b hover:bg-zinc-200">
       <span className="font-semibold">{icon}</span>
-      <p className="font-bold text-md text-green-600">{text}</p>
+      <p className="font-bold text-md text-zinc-950">{text}</p>
     </div>
   );
 };
