@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 142.13 76.22% 36.27%;
+    --primary: 240, 10%, 3.92%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 240 4.8% 95.9%;
@@ -33,6 +33,11 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+  }
+
+  .active-sidebar {
+    background-color: #09090b;
+    color: #fafafa;
   }
 
   .dark {

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   ResizableHandle,
@@ -26,7 +28,7 @@ const DashboardLayout = ({ children }: any) => {
         <ResizablePanel defaultSize={20}>
           <aside className="h-full p-4">
             <DashboardSidebarTitle
-              icon={<Workflow size={32} color="#15803d" />}
+              icon={<Workflow size={32} color="#09090b" />}
               text="System Penunjang Keputusan"
             />
             <DashboardItem
@@ -45,7 +47,7 @@ const DashboardLayout = ({ children }: any) => {
             <DashboardItem
               icon={<Boxes size={20} color="#a1a1aa" />}
               text="Sub Kriteria"
-              route="data-kriteria"
+              route="sub-kriteria"
             />
             <DashboardItem
               icon={<Table size={20} color="#a1a1aa" />}
@@ -86,9 +88,7 @@ const DashboardLayout = ({ children }: any) => {
             </ResizablePanel>
             {/* Main Content */}
             <ResizablePanel defaultSize={90}>
-              <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold">{children}</span>
-              </div>
+              <div className="h-full w-full px-6">{children}</div>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>
