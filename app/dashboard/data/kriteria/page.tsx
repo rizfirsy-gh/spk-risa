@@ -71,11 +71,8 @@ const KriteriaScreen = async () => {
             <Button>Tambah data</Button>
           </SheetTrigger>
           <SheetContent>
-            <SheetHeader>
+            <SheetHeader className="mb-8">
               <SheetTitle>Tambahkan Kriteria Baru</SheetTitle>
-              <SheetDescription>
-                Tambahkan Kriteria Baru biar keren
-              </SheetDescription>
             </SheetHeader>
             <FormTambahKriteria />
           </SheetContent>
