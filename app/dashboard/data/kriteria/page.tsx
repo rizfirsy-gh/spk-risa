@@ -2,6 +2,16 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { kriteria, Kriteria } from "./data/column";
 import { DataTable } from "@/components/ui/data-table";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Form } from "react-hook-form";
+import FormTambahKriteria from "./components/form-tambah-kriteria";
 
 async function getData(): Promise<Kriteria[]> {
   return [
@@ -56,7 +66,20 @@ const KriteriaScreen = async () => {
     <div>
       <div className="flex justify-between items-center">
         <h1 className="text-3xl">Data Kriteria</h1>
-        <Button>Tambah data</Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button>Tambah data</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Tambahkan Kriteria Baru</SheetTitle>
+              <SheetDescription>
+                Tambahkan Kriteria Baru biar keren
+              </SheetDescription>
+            </SheetHeader>
+            <FormTambahKriteria />
+          </SheetContent>
+        </Sheet>
       </div>
       <div className="mx-4 my-8">
         <DataTable columns={kriteria} data={data} />
