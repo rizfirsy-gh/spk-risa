@@ -33,6 +33,17 @@ import { Input } from "@/components/ui/input";
 
 const jenisKriteria = [
   {
+    value: "benefit",
+    label: "Benefit",
+  },
+  {
+    value: "cost",
+    label: "Cost",
+  },
+];
+
+const namaKriteria = [
+  {
     value: "kehadiran",
     label: "Kehadiran",
   },
@@ -127,11 +138,61 @@ const FormTambahKriteria = () => {
             control={form.control}
             name="nama_kriteria"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>Nama Kriteria</FormLabel>
-                <FormControl>
-                  <Input placeholder="" {...field} />
-                </FormControl>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          "w-[200px] justify-between",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value
+                          ? namaKriteria.find(
+                              (kriteria) => kriteria.value === field.value
+                            )?.label
+                          : "Pilih Nama Kriteria"}
+                        <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[200px] p-0">
+                    <Command>
+                      <CommandInput
+                        placeholder="Cari Nama Kriteria..."
+                        className="h-9"
+                      />
+                      <CommandEmpty>Nama Kriteria kosong.</CommandEmpty>
+                      <CommandGroup>
+                        <CommandList>
+                          {namaKriteria.map((kriteria) => (
+                            <CommandItem
+                              value={kriteria.label}
+                              key={kriteria.value}
+                              onSelect={() => {
+                                form.setValue("nama_kriteria", kriteria.value);
+                              }}
+                            >
+                              {kriteria.label}
+                              <CheckIcon
+                                className={cn(
+                                  "ml-auto h-4 w-4",
+                                  kriteria.value === field.value
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                                )}
+                              />
+                            </CommandItem>
+                          ))}
+                        </CommandList>
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
                 <FormMessage />
               </FormItem>
             )}
@@ -174,18 +235,13 @@ const FormTambahKriteria = () => {
                           ? jenisKriteria.find(
                               (kriteria) => kriteria.value === field.value
                             )?.label
-                          : "Pilih Jenis Kriteria"}
+                          : "Pilih Nama Kriteria"}
                         <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
                     <Command>
-                      <CommandInput
-                        placeholder="Cari Jenis Kriteria..."
-                        className="h-9"
-                      />
-                      <CommandEmpty>Jenis Kriteria kosong.</CommandEmpty>
                       <CommandGroup>
                         <CommandList>
                           {jenisKriteria.map((kriteria) => (
