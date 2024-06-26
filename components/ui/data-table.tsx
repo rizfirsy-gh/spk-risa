@@ -26,11 +26,15 @@ import FilterTable from "./filter-table";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  columnName: string;
+  filterPlaceholder: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  columnName,
+  filterPlaceholder,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -57,8 +61,8 @@ export function DataTable<TData, TValue>({
     <div>
       <FilterTable
         table={table}
-        columnName="nama_kriteria"
-        placeholder="Filter kriteria..."
+        columnName={columnName}
+        placeholder={filterPlaceholder}
       />
       <div className="rounded-md border">
         <Table>
