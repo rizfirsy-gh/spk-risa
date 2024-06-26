@@ -12,11 +12,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export type Alternatif = {
+export type Penilaian = {
   nama_alternatif: string;
 };
 
-export const kolomAlternatif: ColumnDef<Alternatif>[] = [
+export const kolomPenilaian: ColumnDef<Penilaian>[] = [
   {
     accessorKey: "no",
     header: () => <h3 className="font-bold">No</h3>,
@@ -24,7 +24,7 @@ export const kolomAlternatif: ColumnDef<Alternatif>[] = [
   },
   {
     accessorKey: "nama_alternatif",
-    header: () => <h3 className="font-bold">Nama Alternatif</h3>,
+    header: () => <h3 className="font-bold">Alternatif</h3>,
   },
   {
     id: "actions",
@@ -38,8 +38,7 @@ export const kolomAlternatif: ColumnDef<Alternatif>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => {}}>Edit</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => {}}>Hapus</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => {}}>Input Nilai</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
