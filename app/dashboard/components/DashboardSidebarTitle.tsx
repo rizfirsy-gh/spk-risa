@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { ReactNode } from "react";
 
 interface DashboardItemProps {
@@ -11,9 +10,13 @@ const DashboardSidebarTitle: React.FC<DashboardItemProps> = ({
   text,
 }) => {
   return (
-    <div className="flex items-center gap-4 p-8 h-14 border-b hover:bg-zinc-200">
-      <span className="font-semibold">{icon}</span>
-      <p className="font-bold text-md text-zinc-950">{text}</p>
+    <div className="flex items-center gap-4 p-8 h-14 border-b">
+      <span className="font-semibold text-zinc-950 dark:text-zinc-50">
+        {icon}
+      </span>
+      <p className="font-bold text-md text-zinc-950 dark:text-zinc-50">
+        {text}
+      </p>
     </div>
   );
 };

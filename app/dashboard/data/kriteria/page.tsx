@@ -1,17 +1,15 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { kriteria, Kriteria } from "./data/column";
+import { kolomKriteria, Kriteria } from "./kolom-kriteria";
 import { DataTable } from "@/components/ui/data-table";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Form } from "react-hook-form";
-import FormTambahKriteria from "./components/form-tambah-kriteria";
+import FormTambahKriteria from "./form-tambah-kriteria";
 
 async function getData(): Promise<Kriteria[]> {
   return [
@@ -63,7 +61,7 @@ async function getData(): Promise<Kriteria[]> {
 const KriteriaScreen = async () => {
   const data = await getData();
   return (
-    <div>
+    <section>
       <div className="flex justify-between items-center">
         <h1 className="text-3xl">Data Kriteria</h1>
         <Sheet>
@@ -79,9 +77,14 @@ const KriteriaScreen = async () => {
         </Sheet>
       </div>
       <div className="mx-4 my-8">
-        <DataTable columns={kriteria} data={data} />
+        <DataTable
+          columns={kolomKriteria}
+          data={data}
+          columnName="nama_kriteria"
+          filterPlaceholder="Cari Kriteria..."
+        />
       </div>
-    </div>
+    </section>
   );
 };
 

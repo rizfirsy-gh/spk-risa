@@ -12,7 +12,7 @@ import { useTheme } from "next-themes";
 import UserAvatar from "./UserAvatar";
 
 const DashboardHeader = () => {
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
     <div className="h-full flex items-center justify-end gap-8 p-6">
