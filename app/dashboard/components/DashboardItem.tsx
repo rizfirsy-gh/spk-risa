@@ -1,33 +1,37 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-import React, { ReactNode } from "react";
+import React, { MouseEventHandler, ReactNode } from "react";
 
 interface DashboardItemProps {
   icon: ReactNode;
   text: string;
   route: string;
+  onClick: MouseEventHandler;
 }
 
-const DashboardItem: React.FC<DashboardItemProps> = ({ icon, text, route }) => {
+const DashboardItem: React.FC<DashboardItemProps> = ({
+  icon,
+  text,
+  route,
+  onClick,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  console.log("pathname", pathname);
-
   return (
     <div
-      className={`flex items-center gap-4 p-8 h-14 rounded-lg ${
+      className={`flex items-center gap-4 p-8 h-14 my-2 rounded-lg cursor-pointer ${
         pathname === `/dashboard/data/${route}`
-          ? "active-sidebar hover:bg-zinc-900"
-          : "hover:bg-zinc-200"
+          ? "active-sidebar hover:bg-zinc-900 dark:bg-zinc-50"
+          : "hover:bg-zinc-200 dark:hover:bg-zinc-800"
       }`}
-      onClick={() => router.push(`/dashboard/data/${route}`)}
+      onClick={onClick}
     >
       <span
         className={`font-semibold ${
           pathname === `/dashboard/data/${route}`
-            ? "text-zinc-50"
-            : "text-zinc-500"
+            ? "text-zinc-50 dark:text-zinc-950"
+            : "text-zinc-500 dark:text-zinc-300"
         }`}
       >
         {icon}
@@ -35,8 +39,8 @@ const DashboardItem: React.FC<DashboardItemProps> = ({ icon, text, route }) => {
       <p
         className={`font-semibold text-sm ${
           pathname === `/dashboard/data/${route}`
-            ? "text-zinc-50"
-            : "text-zinc-500"
+            ? "text-zinc-50 dark:text-zinc-950"
+            : "text-zinc-500 dark:text-zinc-300"
         }`}
       >
         {text}
