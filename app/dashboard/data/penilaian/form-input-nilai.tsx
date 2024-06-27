@@ -16,15 +16,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   nama_alternatif: z.string().min(5, {
+    message: "Nama alternatif min. 5 karakter.",
+  }),
+  kode_kriteria: z.string().min(5, {
     message: "Nama alternatif min. 5 karakter.",
   }),
 });
