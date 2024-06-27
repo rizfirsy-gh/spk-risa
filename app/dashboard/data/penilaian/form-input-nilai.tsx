@@ -34,6 +34,7 @@ const FormInputNilai = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       nama_alternatif: "",
+      kode_kriteria: "",
     },
   });
 
@@ -51,6 +52,21 @@ const FormInputNilai = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Nama Alternatif</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="mb-4">
+          <FormField
+            control={form.control}
+            name="kode_kriteria"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Kode Kriteria</FormLabel>
                 <FormControl>
                   <Input placeholder="" {...field} />
                 </FormControl>

@@ -11,6 +11,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import FormInputNilai from "./form-input-nilai";
 
 export type Penilaian = {
   nama_alternatif: string;
@@ -30,17 +38,17 @@ export const kolomPenilaian: ColumnDef<Penilaian>[] = [
     id: "actions",
     cell: ({ row }) => {
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => {}}>Input Nilai</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant={"outline"}>Input Nilai</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader className="mb-8">
+              <SheetTitle>Beri penilaian</SheetTitle>
+            </SheetHeader>
+            <FormInputNilai />
+          </SheetContent>
+        </Sheet>
       );
     },
   },
