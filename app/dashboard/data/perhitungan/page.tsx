@@ -1,18 +1,54 @@
 import React from "react";
-import { kolomPerhitungan, Perhitungan } from "./kolom-perhitungan";
-import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/ui/data-table";
+import {
+  kolomMatrixKeputusan,
+  MatrixKeputusan,
+} from "./kolom-matrix-keputusan";
+import CardDataPerhitungan from "./components/CardDataPerhitungan";
 
-async function getData(): Promise<Perhitungan[]> {
-  return [];
-}
+const getDataMatrixKeputusan = [
+  {
+    no: "1",
+    namaAlternatif: "WhatsAppGroup",
+    c1: 250,
+    c2: 50,
+  },
+  {
+    no: "1",
+    namaAlternatif: "WhatsAppGroup",
+    c1: 250,
+    c2: 50,
+  },
+  {
+    no: "1",
+    namaAlternatif: "WhatsAppGroup",
+    c1: 250,
+    c2: 50,
+  },
+  {
+    no: "1",
+    namaAlternatif: "WhatsAppGroup",
+    c1: 250,
+    c2: 50,
+  },
+  {
+    no: "1",
+    namaAlternatif: "WhatsAppGroup",
+    c1: 250,
+    c2: 50,
+  },
+  {
+    no: "1",
+    namaAlternatif: "WhatsAppGroup",
+    c1: 250,
+    c2: 50,
+  },
+];
 
 const PerhitunganScreen = async () => {
-  const data = await getData();
   return (
     <section>
       <h1 className="text-3xl">Data Perhitungan</h1>
-      <div className="mx-4 my-8">tabel tabel disini</div>
+      <CardDataPerhitungan />
     </section>
   );
 };
