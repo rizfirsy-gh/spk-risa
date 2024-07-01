@@ -9,13 +9,8 @@ interface DashboardItemProps {
   onClick: MouseEventHandler;
 }
 
-const DashboardItem: React.FC<DashboardItemProps> = ({
-  icon,
-  text,
-  route,
-  onClick,
-}) => {
-  const router = useRouter();
+const DashboardItem: React.FC<DashboardItemProps> = ({ icon, text, route,
+    onClick, }) => {
   const pathname = usePathname();
 
   return (

@@ -48,7 +48,7 @@ const PerhitunganScreen = async () => {
   return (
     <section>
       <h1 className="text-3xl">Data Perhitungan</h1>
-      <CardDataPerhitungan />
+      <CardDataPerhitungan data={getDataMatrixKeputusan} />
     </section>
   );
 };
