@@ -1,6 +1,5 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
-import { kolomAlternatif, Alternatif } from "./kolom-alternatif";
+import { kolomKaryawan, Karyawan } from "./kolom-karyawan";
 import { DataTable } from "@/components/ui/data-table";
 import {
   Sheet,
@@ -10,44 +9,37 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import FormTambahAlternatif from "./form-tambah-alternatif";
+import FormTambahKaryawan from "./form-tambah-karyawan";
+import {getDataKaryawan} from "@/app/app-utils/fetch";
 
-async function getData(): Promise<Alternatif[]> {
-  return [
-    {
-      nama_alternatif: "WhatsApp Group",
-    },
-  ];
-}
-
-const AlternatifScreen = async () => {
-  const data = await getData();
+const KaryawanScreen = async () => {
+  const data = await getDataKaryawan();
   return (
     <section>
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl">Data Alternatif</h1>
+        <h1 className="text-3xl">Data Karyawan</h1>
         <Sheet>
           <SheetTrigger asChild>
             <Button>Tambah data</Button>
           </SheetTrigger>
           <SheetContent>
             <SheetHeader className="mb-8">
-              <SheetTitle>Tambahkan Alternatif Baru</SheetTitle>
+              <SheetTitle>Tambahkan Data Baru</SheetTitle>
             </SheetHeader>
-            <FormTambahAlternatif />
+            <FormTambahKaryawan />
           </SheetContent>
         </Sheet>
       </div>
       <div className="mx-4 my-8">
         <DataTable
-          columns={kolomAlternatif}
+          columns={kolomKaryawan}
           data={data}
-          columnName="nama_alternatif"
-          filterPlaceholder="Cari Alternatif..."
+          columnName="nama_karyawan"
+          filterPlaceholder="Cari Karyawan..."
         />
       </div>
     </section>
   );
 };
 
-export default AlternatifScreen;
+export default KaryawanScreen;
