@@ -2,8 +2,6 @@
 
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cn } from "@/lib/utils";
-import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -16,20 +14,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   nama_alternatif: z.string().min(5, {
-    message: "Nama alternatif min. 5 karakter.",
+    message: "Nama karyawan min. 5 karakter.",
   }),
 });
 
-const FormTambahAlternatif = () => {
+const FormTambahKaryawan = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,4 +58,4 @@ const FormTambahAlternatif = () => {
   );
 };
 
-export default FormTambahAlternatif;
+export default FormTambahKaryawan;

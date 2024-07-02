@@ -1,9 +1,4 @@
 import React from "react";
-import {
-  kolomMatrixKeputusan,
-  MatrixKeputusan,
-} from "./kolom-matrix-keputusan";
-import CardDataPerhitungan from "./components/CardDataPerhitungan";
 
 const getDataMatrixKeputusan = [
   {

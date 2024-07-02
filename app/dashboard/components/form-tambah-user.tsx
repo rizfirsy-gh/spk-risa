@@ -2,8 +2,6 @@
 
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cn } from "@/utils/utils";
-import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -19,25 +17,33 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  nama_alternatif: z.string().min(5, {
-    message: "Nama karyawan min. 5 karakter.",
+  nama: z.string().min(5, {
+    message: "Nama perlu dimasukkan.",
   }),
-  kode_kriteria: z.string().min(5, {
-    message: "Nama karyawan min. 5 karakter.",
+  username: z.string().min(5, {
+    message: "Username belum dibuat.",
+  }),
+  password: z.string().min(5, {
+    message: "Password belum dibuat.",
   }),
 });
 
-const FormInputNilai = () => {
+interface TambahUserProps {
+  targettedRole: string;
+}
+
+const FormTambahUser: React.FC<TambahUserProps> = ({ targettedRole }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nama_alternatif: "",
-      kode_kriteria: "",
+      nama: "",
+      username: "",
+      password: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    console.log(values + targettedRole);
   }
 
   return (
@@ -46,10 +52,10 @@ const FormInputNilai = () => {
         <div className="mb-4">
           <FormField
             control={form.control}
-            name="nama_alternatif"
+            name="nama"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nama Alternatif</FormLabel>
+                <FormLabel>Nama</FormLabel>
                 <FormControl>
                   <Input placeholder="" {...field} />
                 </FormControl>
@@ -61,10 +67,25 @@ const FormInputNilai = () => {
         <div className="mb-4">
           <FormField
             control={form.control}
-            name="kode_kriteria"
+            name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Kode Kriteria</FormLabel>
+                <FormLabel>Buat Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="mb-4">
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Buat Password Baru</FormLabel>
                 <FormControl>
                   <Input placeholder="" {...field} />
                 </FormControl>
@@ -79,4 +100,4 @@ const FormInputNilai = () => {
   );
 };
 
-export default FormInputNilai;
+export default FormTambahUser;
