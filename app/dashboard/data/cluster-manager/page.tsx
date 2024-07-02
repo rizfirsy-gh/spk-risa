@@ -10,16 +10,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import FormTambahUser from "../../components/form-tambah-user";
-import {getDataClusterManager} from "@/app/app-utils/fetch";
+import { getDataClusterManager } from "@/app/app-utils/fetch";
 
 const ClusterManagerScreen = async () => {
   const data = await getDataClusterManager();
-  const dataKolom : {nama: string}[] = [];
-      data.map((item) =>
-          dataKolom.push({
-            nama: item.nama_cm
-          })
-      )
+  const dataKolom: { nama: string }[] = [];
+  data.map((item) =>
+    dataKolom.push({
+      nama: item.nama_cm,
+    })
+  );
 
   return (
     <section>
@@ -33,7 +33,7 @@ const ClusterManagerScreen = async () => {
             <SheetHeader className="mb-8">
               <SheetTitle>Tambahkan Data Baru</SheetTitle>
             </SheetHeader>
-            <FormTambahUser />
+            <FormTambahUser targettedRole="cm" />
           </SheetContent>
         </Sheet>
       </div>
