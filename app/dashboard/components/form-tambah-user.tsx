@@ -28,18 +28,22 @@ const formSchema = z.object({
   }),
 });
 
-const FormTambahUser = (endpoint: string) => {
+interface TambahUserProps {
+  targettedRole: string;
+}
+
+const FormTambahUser: React.FC<TambahUserProps> = ({ targettedRole }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       nama: "",
-      username: '',
-      password: ''
+      username: "",
+      password: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values + endpoint);
+    console.log(values + targettedRole);
   }
 
   return (
@@ -47,47 +51,47 @@ const FormTambahUser = (endpoint: string) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="mb-4">
           <FormField
-              control={form.control}
-              name="nama"
-              render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Nama</FormLabel>
-                    <FormControl>
-                      <Input placeholder="" {...field} />
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-              )}
+            control={form.control}
+            name="nama"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nama</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
         </div>
         <div className="mb-4">
           <FormField
-              control={form.control}
-              name="username"
-              render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Buat Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="" {...field} />
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-              )}
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Buat Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
         </div>
         <div className="mb-4">
           <FormField
-              control={form.control}
-              name="password"
-              render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Buat Password Baru</FormLabel>
-                    <FormControl>
-                      <Input placeholder="" {...field} />
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-              )}
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Buat Password Baru</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
         </div>
         <Button type="submit">Submit</Button>
