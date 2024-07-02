@@ -19,6 +19,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
+import { postAdminAuth } from "./app-utils/post_data";
+import { useRouter } from "next/navigation";
+import { decodeToken } from "./app-utils/auth";
+import { useToast } from "@/components/ui/use-toast";
+import { title } from "process";
 
 const formSchema = z.object({
   username: z.string().min(4).max(50),
@@ -27,6 +32,8 @@ const formSchema = z.object({
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,8 +43,19 @@ export default function Home() {
     },
   });
 
-  function onSubmit(value: z.infer<typeof formSchema>) {
-    console.log("value", value);
+  async function onSubmit(value: z.infer<typeof formSchema>) {
+    const res = await postAdminAuth(value);
+
+    if (res.status === 200) {
+      if (res.role === "adm") {
+        router.push("/dashboard/");
+      }
+    } else {
+      toast({
+        variant: "destructive",
+        description: res.message,
+      });
+    }
   }
 
   return (
