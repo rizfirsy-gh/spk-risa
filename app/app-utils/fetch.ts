@@ -10,3 +10,11 @@ export const getDataKaryawan = cache(async (): Promise<{ nama_karyawan: string }
     ];
 })
 
+export const getDataClusterManager = cache(async (): Promise<{ nama_cm: string }[]> => {
+    const data = fetch('');
+    return [
+        {
+            nama_cm: "CM Ed Sheeran",
+        },
+    ];
+})

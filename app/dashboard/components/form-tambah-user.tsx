@@ -17,21 +17,29 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  nama_alternatif: z.string().min(5, {
-    message: "Nama karyawan min. 5 karakter.",
+  nama: z.string().min(5, {
+    message: "Nama perlu dimasukkan.",
+  }),
+  username: z.string().min(5, {
+    message: "Username belum dibuat.",
+  }),
+  password: z.string().min(5, {
+    message: "Password belum dibuat.",
   }),
 });
 
-const FormTambahKaryawan = () => {
+const FormTambahUser = (endpoint: string) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nama_alternatif: "",
+      nama: "",
+      username: '',
+      password: ''
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    console.log(values + endpoint);
   }
 
   return (
@@ -39,17 +47,47 @@ const FormTambahKaryawan = () => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="mb-4">
           <FormField
-            control={form.control}
-            name="nama_alternatif"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nama Alternatif</FormLabel>
-                <FormControl>
-                  <Input placeholder="" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+              control={form.control}
+              name="nama"
+              render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Nama</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+              )}
+          />
+        </div>
+        <div className="mb-4">
+          <FormField
+              control={form.control}
+              name="username"
+              render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Buat Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+              )}
+          />
+        </div>
+        <div className="mb-4">
+          <FormField
+              control={form.control}
+              name="password"
+              render={({field}) => (
+                  <FormItem>
+                    <FormLabel>Buat Password Baru</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+              )}
           />
         </div>
         <Button type="submit">Submit</Button>
@@ -58,4 +96,4 @@ const FormTambahKaryawan = () => {
   );
 };
 
-export default FormTambahKaryawan;
+export default FormTambahUser;

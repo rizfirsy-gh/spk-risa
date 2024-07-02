@@ -12,19 +12,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export type Manager = {
-  nama_karyawan: string;
+export type User = {
+  nama: string;
 };
 
-export const kolomManager: ColumnDef<Manager>[] = [
+export const kolomUser: ColumnDef<User>[] = [
   {
     accessorKey: "no",
     header: () => <h3 className="font-bold">No</h3>,
     cell: ({ row }) => <div className="font-bold">{row.index + 1}</div>,
   },
   {
-    accessorKey: "nama_karyawan",
-    header: () => <h3 className="font-bold">Nama Karyawan</h3>,
+    accessorKey: "nama",
+    header: () => <h3 className="font-bold">Nama</h3>,
   },
   {
     id: "actions",
@@ -33,7 +33,7 @@ export const kolomManager: ColumnDef<Manager>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">Buka menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { kolomKaryawan, Karyawan } from "./kolom-karyawan";
+import { kolomUser, User } from "../../components/kolom-user";
 import { DataTable } from "@/components/ui/data-table";
 import {
   Sheet,
@@ -9,11 +9,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import FormTambahKaryawan from "./form-tambah-karyawan";
-import {getDataKaryawan} from "@/app/app-utils/fetch";
+import FormTambahUser from "../../components/form-tambah-user";
+import {getDataClusterManager} from "@/app/app-utils/fetch";
 
-const KaryawanScreen = async () => {
-  const data = await getDataKaryawan();
+const ClusterManagerScreen = async () => {
+  const data = await getDataClusterManager();
+  const dataKolom : {nama: string}[] = [];
+      data.map((item) =>
+          dataKolom.push({
+            nama: item.nama_cm
+          })
+      )
+
   return (
     <section>
       <div className="flex justify-between items-center">
@@ -26,20 +33,20 @@ const KaryawanScreen = async () => {
             <SheetHeader className="mb-8">
               <SheetTitle>Tambahkan Data Baru</SheetTitle>
             </SheetHeader>
-            <FormTambahKaryawan />
+            <FormTambahUser />
           </SheetContent>
         </Sheet>
       </div>
       <div className="mx-4 my-8">
         <DataTable
-          columns={kolomKaryawan}
-          data={data}
-          columnName="nama_karyawan"
-          filterPlaceholder="Cari Karyawan..."
+          columns={kolomUser}
+          data={dataKolom}
+          columnName="nama"
+          filterPlaceholder="Cari berdasarkan nama..."
         />
       </div>
     </section>
   );
 };
 
-export default KaryawanScreen;
+export default ClusterManagerScreen;

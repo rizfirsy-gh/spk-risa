@@ -23,7 +23,7 @@ import { DeleteAlertProvider } from "@/context/delete_alert_dialog";
 import { useTheme } from "next-themes";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { checkUserRole } from "@/lib/auth";
-import AdminDashboard from "./admin/components/AdminDashboard";
+import AdminDashboard from "./admin/AdminDashboard";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
