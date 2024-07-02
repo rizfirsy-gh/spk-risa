@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = Manrope({ subsets: ["latin"] });
 
@@ -24,7 +25,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div>{children}</div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
