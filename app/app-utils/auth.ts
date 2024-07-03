@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 
 export function checkUserRole() {
-  return "admin";
+  return localStorage.getItem("role");
 }
 
 export function decodeToken(token: string) {

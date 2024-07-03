@@ -48,7 +48,7 @@ export default function Home() {
 
     if (res.status === 200) {
       if (res.role === "adm") {
-        router.push("/dashboard/");
+        router.push("/redirect/");
       }
     } else {
       toast({
