@@ -24,6 +24,7 @@ import { useTheme } from "next-themes";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { checkUserRole } from "@/lib/auth";
 import AdminDashboard from "./admin/AdminDashboard";
+import ShiftManagerDashboard from "./shift-manager/ShiftManagerDashboard";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -31,7 +32,19 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const role = checkUserRole();
 
   if (role === "admin") {
-    return <AdminDashboard>{children}</AdminDashboard>;
+    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+  }
+
+  if (role === "sm") {
+    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+  }
+
+  if (role === "cm") {
+    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+  }
+
+  if (role === "hrd") {
+    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
   }
 
   return (
