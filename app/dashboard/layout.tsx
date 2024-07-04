@@ -25,6 +25,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { checkUserRole } from "@/lib/auth";
 import AdminDashboard from "./admin/AdminDashboard";
 import ShiftManagerDashboard from "./shift-manager/ShiftManagerDashboard";
+import KaryawanDashboard from "./karyawan/KaryawanDashboard";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -46,28 +47,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   if (role === "hrd") {
     return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
   }
-
-  return (
-    <ResizablePanelGroup direction="horizontal" className="w-screen h-screen">
-      {/* Sidebar */}
-      <ResizablePanel defaultSize={20}>
-        <p>aside</p>
-      </ResizablePanel>
-      <ResizableHandle withHandle />
-      {/* Header */}
-      <ResizablePanel defaultSize={80}>
-        <ResizablePanelGroup direction="vertical">
-          <ResizablePanel defaultSize={10}>
-            <p>header</p>
-          </ResizablePanel>
-          {/* Main Content */}
-          <ResizablePanel defaultSize={90} className="h-screen w-full p-6">
-            <p>main</p>
-          </ResizablePanel>
-        </ResizablePanelGroup>
-      </ResizablePanel>
-    </ResizablePanelGroup>
-  );
+  if (role === "karyawan") {
+    return <KaryawanDashboard>{children}</KaryawanDashboard>;
+  }
 };
 
 export default DashboardLayout;
