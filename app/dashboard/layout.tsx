@@ -47,12 +47,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   if (role === "hrd") {
     return <HRDDashboard>{children}</HRDDashboard>;
   }
-        
-  if (role === "karyawan") {
-    return <KaryawanDashboard>{children}</KaryawanDashboard>;
 
   if (role === "karyawan") {
-    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+    return <KaryawanDashboard>{children}</KaryawanDashboard>;
   }
 };
 
