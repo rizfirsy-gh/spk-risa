@@ -25,6 +25,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { checkUserRole } from "@/lib/auth";
 import AdminDashboard from "./admin/AdminDashboard";
 import ShiftManagerDashboard from "./shift-manager/ShiftManagerDashboard";
+import HRDDashboard from "./hrd/HRDDashboard";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (role === "hrd") {
-    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+    return <HRDDashboard>{children}</HRDDashboard>;
   }
 
   return (
