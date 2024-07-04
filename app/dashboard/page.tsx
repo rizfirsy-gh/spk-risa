@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -9,8 +10,34 @@ import {
 import Link from "next/link";
 
 import React from "react";
+import { checkUserRole } from "../app-utils/auth";
 
 const Dashboard = () => {
+  const role = checkUserRole();
+
+  if (role === "sm") {
+    return (
+      <div className="grid grid-cols-3 gap-4">
+        <Link href={"dashboard/data/penilaian"}>
+          <Card>
+            <CardHeader>
+              <CardTitle>Data Penilaian</CardTitle>
+              <CardDescription>Berisi tentang data Penilaian</CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+        <Link href={"dashboard/data/penilaian"}>
+          <Card>
+            <CardHeader>
+              <CardTitle>Data Perhitungan</CardTitle>
+              <CardDescription>Berisi tentang data Perhitungan</CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-3 gap-4">
       <Link href={"dashboard/data/kriteria"}>

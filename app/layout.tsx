@@ -25,7 +25,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div>{children}</div>
+          <div className="h-screen w-screen">{children}</div>
           <Toaster />
         </ThemeProvider>
       </body>
