@@ -26,14 +26,14 @@ import { checkUserRole } from "@/lib/auth";
 import AdminDashboard from "./admin/AdminDashboard";
 import ShiftManagerDashboard from "./shift-manager/ShiftManagerDashboard";
 import KaryawanDashboard from "./karyawan/KaryawanDashboard";
+import HRDDashboard from "./hrd/HRDDashboard";
+import ClusterManagerDashboard from "./cluster-manager/ClusterManagerDashboard";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-  const { theme } = useTheme();
   const role = checkUserRole();
 
   if (role === "admin") {
-    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+    return <AdminDashboard>{children}</AdminDashboard>;
   }
 
   if (role === "sm") {
@@ -41,14 +41,18 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (role === "cm") {
-    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+    return <ClusterManagerDashboard>{children}</ClusterManagerDashboard>;
   }
 
   if (role === "hrd") {
-    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+    return <HRDDashboard>{children}</HRDDashboard>;
   }
+        
   if (role === "karyawan") {
     return <KaryawanDashboard>{children}</KaryawanDashboard>;
+
+  if (role === "karyawan") {
+    return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
   }
 };
 
