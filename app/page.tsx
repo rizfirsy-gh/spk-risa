@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 import { decodeToken } from "./app-utils/auth";
 import { useToast } from "@/components/ui/use-toast";
 import { title } from "process";
+import { Card } from "@/components/ui/card";
 
 const formSchema = z.object({
   username: z.string().min(4).max(50),
@@ -60,20 +61,22 @@ export default function Home() {
 
   return (
     <main className="grid grid-cols-2 min-h-screen">
-      <section className="p-8 bg-zinc-100 dark:bg-zinc-900 w-full h-full grid place-content-center border-r">
-        <div className="overflow-clip rounded-tr-[56px] rounded-bl-[56px] w-[300px] h-[400px]">
-          <Image
-            src="/login_image.jpg"
-            width={300}
-            height={250}
-            alt="Picture of the author"
-          />
+      <section className="p-8 flex flex-col justify-between bg-zinc-200 dark:bg-zinc-800 relative">
+        <div>
+          <h1 className="text-2xl mb-4">
+            IMPLEMENTASI DECISION SUPPORT SYSTEM PENENTUAN PENERIMAAN BANTUAN
+            UNTUK ANAK YATIM PIATU MENGGUNAKAN METODE PROMETHEE
+          </h1>
+          <h2 className="mb-4">(Studi Kasus : MI Raudhatul Athfal)</h2>
+        </div>
+        <div>
+          <h1 className="text-2xl mb-4">Risa Satifa (20101140----)</h1>
+          <h2 className="mb-4">Universitas Pamulang</h2>
         </div>
       </section>
       <section className="p-8 grid place-content-center">
-        <h1 className="text-2xl">Sistem Penunjang Keputusan</h1>
-        <h2 className="mb-4">Metode ROC - OCRA</h2>
-        <div className="max-w-sm">
+        <h1 className="text-2xl mb-4">Silahkan Login untuk melanjutkan</h1>
+        <Card className="max-w-sm p-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="mb-4">
@@ -126,7 +129,7 @@ export default function Home() {
               <Button type="submit">Submit</Button>
             </form>
           </Form>
-        </div>
+        </Card>
       </section>
     </main>
   );

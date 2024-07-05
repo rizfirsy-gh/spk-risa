@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 240 5.9% 10%;
+    --primary: 162.93, 93.55%, 24.31%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 240 4.8% 95.9%;
@@ -36,7 +36,7 @@
   }
 
   .active-sidebar {
-    background-color: #09090b;
+    background-color: #047857;
     color: #fafafa;
   }
 
@@ -50,8 +50,8 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 100%;
-    --primary-foreground: 240, 10%, 3.92%;
+    --primary: 162.93, 93.55%, 24.31%;
+    --primary-foreground: 0, 0%, 98.04%;
 
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
