@@ -11,10 +11,10 @@ const DashboardSidebarTitle: React.FC<DashboardItemProps> = ({
 }) => {
   return (
     <div className="flex items-center gap-4 p-8 h-14 border-b">
-      <span className="font-semibold text-zinc-950 dark:text-zinc-50">
+      <span className="font-semibold text-emerald-950 dark:text-emerald-500">
         {icon}
       </span>
-      <p className="font-bold text-md text-zinc-950 dark:text-zinc-50">
+      <p className="font-bold text-md text-emerald-950 dark:text-emerald-50">
         {text}
       </p>
     </div>

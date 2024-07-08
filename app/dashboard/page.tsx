@@ -48,19 +48,23 @@ const Dashboard = () => {
           </CardHeader>
         </Card>
       </Link>
-      <Link href={"dashboard/data/sub-kriteria"}>
+      <Link href={"dashboard/data/kepala-sekolah"}>
         <Card>
           <CardHeader>
-            <CardTitle>Data Sub Kriteria</CardTitle>
-            <CardDescription>Berisi tentang data sub kriteria</CardDescription>
+            <CardTitle>Data Kepala Sekolah</CardTitle>
+            <CardDescription>
+              Klik disini untuk melihat data-data Kepala Sekolah
+            </CardDescription>
           </CardHeader>
         </Card>
       </Link>
-      <Link href={"dashboard/data/alternatif"}>
+      <Link href={"dashboard/data/siswa"}>
         <Card>
           <CardHeader>
-            <CardTitle>Data Alternatif</CardTitle>
-            <CardDescription>Berisi tentang data alternatif</CardDescription>
+            <CardTitle>Siswa</CardTitle>
+            <CardDescription>
+              Klik disini untuk melihat data-data siswa
+            </CardDescription>
           </CardHeader>
         </Card>
       </Link>

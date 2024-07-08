@@ -10,17 +10,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import FormTambahUser from "../../components/form-tambah-user";
-import { getDataShiftManager } from "@/app/app-utils/fetch";
 
-const ShiftManagerScreen = async () => {
-  const data = await getDataShiftManager();
-  const dataKolom: { nama: string }[] = [];
-  data.map((item) =>
-    dataKolom.push({
-      nama: item.nama_sm,
-    })
-  );
-
+const KepalaSekolahScreen = async () => {
   return (
     <section>
       <div className="flex justify-between items-center">
@@ -37,16 +28,9 @@ const ShiftManagerScreen = async () => {
           </SheetContent>
         </Sheet>
       </div>
-      <div className="mx-4 my-8">
-        <DataTable
-          columns={kolomUser}
-          data={dataKolom}
-          columnName="nama"
-          filterPlaceholder="Cari berdasarkan nama..."
-        />
-      </div>
+      <div className="mx-4 my-8">tabel</div>
     </section>
   );
 };
 
-export default ShiftManagerScreen;
+export default KepalaSekolahScreen;

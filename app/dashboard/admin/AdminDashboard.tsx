@@ -14,7 +14,7 @@ import {
   Table,
   Diameter,
   FileLineChart,
-  Workflow,
+  School,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -35,12 +35,12 @@ const AdminDashboard = ({ children }: any) => {
           <DashboardSidebarTitle
             icon={
               theme === "dark" ? (
-                <Workflow size={32} color="#ffffff" />
+                <School size={28} color="#10b981" />
               ) : (
-                <Workflow size={32} color="#09090b" />
+                <School size={28} color="#10b981" />
               )
             }
-            text="System Penunjang Keputusan"
+            text="MI Raudhatul Athfal"
           />
           <div className="py-2">
             <DashboardItem
@@ -61,27 +61,15 @@ const AdminDashboard = ({ children }: any) => {
           />
           <DashboardItem
             icon={<Table size={20} color="#a1a1aa" />}
-            text="Shift Manager"
-            route="shift-manager"
-            onClick={() => router.push(`/dashboard/data/shift-manager`)}
+            text="Kepala Sekolah"
+            route="kepala-sekolah"
+            onClick={() => router.push(`/dashboard/data/kepala-sekolah`)}
           />
           <DashboardItem
             icon={<Table size={20} color="#a1a1aa" />}
-            text="Cluster Manager"
-            route="cluster-manager"
-            onClick={() => router.push(`/dashboard/data/cluster-manager`)}
-          />
-          <DashboardItem
-            icon={<Table size={20} color="#a1a1aa" />}
-            text="HRD"
-            route="hrd"
-            onClick={() => router.push(`/dashboard/data/hrd`)}
-          />
-          <DashboardItem
-            icon={<Table size={20} color="#a1a1aa" />}
-            text="Karyawan"
-            route="karyawan"
-            onClick={() => router.push(`/dashboard/data/karyawan`)}
+            text="Siswa"
+            route="siswa"
+            onClick={() => router.push(`/dashboard/data/siswa`)}
           />
           <DashboardItem
             icon={<NotepadText size={20} color="#a1a1aa" />}

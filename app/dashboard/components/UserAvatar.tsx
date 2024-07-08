@@ -8,15 +8,17 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { CircleUserRound } from "lucide-react";
 
 const UserAvatar = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <Button variant={"outline"}>
+          <CircleUserRound color="#059669" size={20} />
+          <p className="ml-2 font-bold">Akun saya</p>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem>Lihat Profile</DropdownMenuItem>
