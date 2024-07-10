@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { kolomKriteria, Kriteria } from "./kolom-kriteria";
@@ -60,6 +61,7 @@ async function getData(): Promise<Kriteria[]> {
 
 const KriteriaScreen = async () => {
   const data = await getData();
+
   return (
     <section>
       <div className="flex justify-between items-center">

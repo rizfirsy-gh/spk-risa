@@ -15,7 +15,7 @@ const KepalaSekolahScreen = async () => {
   return (
     <section>
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl">Data Karyawan</h1>
+        <h1 className="text-3xl">Data Kepala Sekolah</h1>
         <Sheet>
           <SheetTrigger asChild>
             <Button>Tambah data</Button>

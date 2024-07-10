@@ -40,7 +40,7 @@ const AdminDashboard = ({ children }: any) => {
                 <School size={28} color="#10b981" />
               )
             }
-            text="MI Raudhatul Athfal"
+            text="MI Raudlatul Athfal"
           />
           <div className="py-2">
             <DashboardItem

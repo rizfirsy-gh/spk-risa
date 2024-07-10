@@ -67,10 +67,10 @@ export default function Home() {
             IMPLEMENTASI DECISION SUPPORT SYSTEM PENENTUAN PENERIMAAN BANTUAN
             UNTUK ANAK YATIM PIATU MENGGUNAKAN METODE PROMETHEE
           </h1>
-          <h2 className="mb-4">(Studi Kasus : MI Raudhatul Athfal)</h2>
+          <h2 className="mb-4">(Studi Kasus : MI Raudlatul Athfal)</h2>
         </div>
         <div>
-          <h1 className="text-2xl mb-4">Risa Satifa (20101140----)</h1>
+          <h1 className="text-2xl mb-4">Risa Satifa (2010 1140 1387)</h1>
           <h2 className="mb-4">Universitas Pamulang</h2>
         </div>
       </section>
