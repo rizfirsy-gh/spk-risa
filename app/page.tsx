@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState } from "react";
 
@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { login } from "./app-utils/auth";
+import { checkUserRole, getToken, login } from "./app-utils/auth";
 import { useToast } from "@/components/ui/use-toast";
 import { Card } from "@/components/ui/card";
 
@@ -30,6 +30,7 @@ const formSchema = z.object({
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);
+  const [token, setToken] = useState<any>();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -40,6 +41,24 @@ export default function Home() {
       password: "",
     },
   });
+
+  useEffect(() => {
+    let ignore = false;
+    const token = getToken();
+    if (!ignore) {
+      setToken(token);
+    }
+
+    return () => {
+      ignore = true;
+    };
+  }, [token]);
+
+  if (!token) {
+    router.push("/");
+  } else {
+    router.push("/dashboard");
+  }
 
   async function onSubmit(value: z.infer<typeof formSchema>) {
     const res = await login(value);
