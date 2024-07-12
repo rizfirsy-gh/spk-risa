@@ -1,99 +1,94 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import React from "react";
+import { useRouter } from "next/navigation";
+import { checkUserRole } from "../app-utils/auth";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
-import React from "react";
-import { checkUserRole } from "../app-utils/auth";
-
-const Dashboard = () => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const role = checkUserRole();
+  const route = useRouter();
 
-  if (role === "sm") {
+  // if (role === "shm") {
+  //   return <ShiftManagerDashboard>{children}</ShiftManagerDashboard>;
+  // }
+
+  // if (role === "cm") {
+  //   return <ClusterManagerDashboard>{children}</ClusterManagerDashboard>;
+  // }
+
+  // if (role === "hrd") {
+  //   return <HRDDashboard>{children}</HRDDashboard>;
+  // }
+
+  // if (role === "kry") {
+  //   return <KaryawanDashboard>{children}</KaryawanDashboard>;
+  // }
+
+  if (role === "adm") {
     return (
-      <div className="grid grid-cols-3 gap-4">
-        <Link href={"dashboard/data/penilaian"}>
-          <Card>
-            <CardHeader>
-              <CardTitle>Data Penilaian</CardTitle>
-              <CardDescription>Berisi tentang data Penilaian</CardDescription>
-            </CardHeader>
-          </Card>
-        </Link>
-        <Link href={"dashboard/data/penilaian"}>
-          <Card>
-            <CardHeader>
-              <CardTitle>Data Perhitungan</CardTitle>
-              <CardDescription>Berisi tentang data Perhitungan</CardDescription>
-            </CardHeader>
-          </Card>
-        </Link>
+      <div>
+        <Card className="mb-8">
+          <CardHeader>
+            <b>Selamat datang, Admin.</b>
+          </CardHeader>
+          <CardContent>
+            Selamat Datang Admin di Halaman Utama Decision Support Systems
+            <br />
+            Untuk Penentuan Penerimaan Bantuan Untuk Anak Yatim Piatu
+            Menggunakan Metode PROMETHEE
+          </CardContent>
+        </Card>
+        <h1 className="my-4 font-bold text-lg">Menu</h1>
+        <section className="grid grid-cols-3 gap-4">
+          <Link href={"dashboard/data/kriteria"}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Data Kriteria</CardTitle>
+              </CardHeader>
+            </Card>
+          </Link>
+          <Link href={"dashboard/data/siswa"}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Data Siswa</CardTitle>
+              </CardHeader>
+            </Card>
+          </Link>
+          <Link href={"dashboard/data/kepala-sekolah"}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Data Kepala Sekolah</CardTitle>
+              </CardHeader>
+            </Card>
+          </Link>
+          <Link href={"dashboard/data/penilaian"}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Data Penilaian</CardTitle>
+              </CardHeader>
+            </Card>
+          </Link>
+          <Link href={"dashboard/data/perhitungan"}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Data Perhitungan</CardTitle>
+              </CardHeader>
+            </Card>
+          </Link>
+          <Link href={"dashboard/data/hasil-akhir"}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Data Hasil Akhir</CardTitle>
+              </CardHeader>
+            </Card>
+          </Link>
+        </section>
       </div>
     );
   }
 
-  return (
-    <div className="grid grid-cols-3 gap-4">
-      <Link href={"dashboard/data/kriteria"}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Data Kriteria</CardTitle>
-            <CardDescription>Berisi tentang data kriteria</CardDescription>
-          </CardHeader>
-        </Card>
-      </Link>
-      <Link href={"dashboard/data/kepala-sekolah"}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Data Kepala Sekolah</CardTitle>
-            <CardDescription>
-              Klik disini untuk melihat data-data Kepala Sekolah
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </Link>
-      <Link href={"dashboard/data/siswa"}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Siswa</CardTitle>
-            <CardDescription>
-              Klik disini untuk melihat data-data siswa
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </Link>
-      <Link href={"dashboard/data/penilaian"}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Data Penilaian</CardTitle>
-            <CardDescription>Berisi tentang data penilaian</CardDescription>
-          </CardHeader>
-        </Card>
-      </Link>
-      <Link href={"dashboard/data/perhitungan"}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Data Perhitungan</CardTitle>
-            <CardDescription>Berisi tentang data perhitungan</CardDescription>
-          </CardHeader>
-        </Card>
-      </Link>
-      <Link href={"dashboard/data/hasil-akhir"}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Data Hasil Akhir</CardTitle>
-            <CardDescription>Berisi tentang data hasil akhir</CardDescription>
-          </CardHeader>
-        </Card>
-      </Link>
-    </div>
-  );
+  route.push("/");
 };
 
-export default Dashboard;
+export default DashboardLayout;

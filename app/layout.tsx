@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 
-const font = Manrope({ subsets: ["latin"] });
+const font = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${font.className} h-screen overflow-hidden`}>
+        <Toaster />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -26,7 +30,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="h-screen w-screen">{children}</div>
-          <Toaster />
         </ThemeProvider>
       </body>
     </html>

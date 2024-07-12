@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,11 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
-import { postAdminAuth } from "./app-utils/post_data";
 import { useRouter } from "next/navigation";
-import { decodeToken } from "./app-utils/auth";
+import { login } from "./app-utils/auth";
 import { useToast } from "@/components/ui/use-toast";
-import { title } from "process";
 import { Card } from "@/components/ui/card";
 
 const formSchema = z.object({
@@ -45,12 +42,10 @@ export default function Home() {
   });
 
   async function onSubmit(value: z.infer<typeof formSchema>) {
-    const res = await postAdminAuth(value);
+    const res = await login(value);
 
     if (res.status === 200) {
-      if (res.role === "adm") {
-        router.push("/redirect/");
-      }
+      router.push("/redirect/");
     } else {
       toast({
         variant: "destructive",

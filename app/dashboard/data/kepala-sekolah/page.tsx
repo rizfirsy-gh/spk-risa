@@ -1,34 +1,95 @@
-import { Button } from "@/components/ui/button";
-import { kolomUser, User } from "../../components/kolom-user";
-import { DataTable } from "@/components/ui/data-table";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import FormTambahUser from "../../components/form-tambah-user";
+"use client";
 
-const KepalaSekolahScreen = async () => {
+import React, { useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Card, CardContent } from "@/components/ui/card";
+import { getDataKepsek } from "./actions";
+
+const KepalaSekolahScreen = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [refetch, setRefetch] = useState(false);
+  const [dataKepalaSekolah, setDataKepalaSekolah] = useState([
+    {
+      id_kepsek: 0,
+      username: "",
+      nama_kepsek: "",
+    },
+  ]);
+
+  useEffect(() => {
+    let ignore = false;
+    setIsLoading(true);
+    getDataKepsek().then((result) => {
+      console.log("result", result);
+      setIsLoading(false);
+      if (!ignore && result.status === 200) {
+        setDataKepalaSekolah(result.data);
+      } else {
+        setDataKepalaSekolah([]);
+      }
+    });
+
+    return () => {
+      ignore = true;
+    };
+  }, [refetch]);
+
   return (
     <section>
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl">Data Kepala Sekolah</h1>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button>Tambah data</Button>
-          </SheetTrigger>
-          <SheetContent>
-            <SheetHeader className="mb-8">
-              <SheetTitle>Tambahkan Data Baru</SheetTitle>
-            </SheetHeader>
-            <FormTambahUser targettedRole="sm" />
-          </SheetContent>
-        </Sheet>
+        <h1 className="text-3xl">Data Kriteria</h1>
       </div>
-      <div className="mx-4 my-8">tabel</div>
+      <Card className="mx-4 my-8">
+        <CardContent>
+          <Table>
+            <TableCaption>
+              {dataKepalaSekolah && dataKepalaSekolah.length === 0
+                ? "Data kriteria kosong"
+                : ""}
+            </TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="font-bold text-center w-[100px]">
+                  ID
+                </TableHead>
+                <TableHead>Username</TableHead>
+                <TableHead>Nama</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={7} className="h-24 text-center">
+                    Mendapatkan Data...
+                  </TableCell>
+                </TableRow>
+              ) : (
+                dataKepalaSekolah.map((data, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-bold text-center">
+                      {data.id_kepsek === null ? "-" : "C" + data.id_kepsek}
+                    </TableCell>
+                    <TableCell>
+                      {data.username === null ? "-" : data.username}
+                    </TableCell>
+                    <TableCell>
+                      {data.nama_kepsek === null ? "-" : data.nama_kepsek}
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </section>
   );
 };
