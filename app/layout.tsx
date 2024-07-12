@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 
 const font = Poppins({
@@ -23,14 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${font.className} h-screen overflow-hidden`}>
         <Toaster />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="h-screen w-screen">{children}</div>
-        </ThemeProvider>
+        <div className="h-screen w-screen">{children}</div>
       </body>
     </html>
   );

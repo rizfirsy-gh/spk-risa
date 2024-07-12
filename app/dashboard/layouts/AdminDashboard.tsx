@@ -15,17 +15,23 @@ import {
   Diameter,
   FileLineChart,
   School,
+  LogOut,
+  SunIcon,
+  MoonIcon,
 } from "lucide-react";
-import { useTheme } from "next-themes";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Link from "next/link";
 import DashboardSidebarTitle from "@/app/dashboard/components/DashboardSidebarTitle";
 import DashboardItem from "@/app/dashboard/components/DashboardItem";
 import DashboardHeader from "@/app/dashboard/components/DashboardHeader";
+import { Separator } from "@/components/ui/separator";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 const AdminDashboard = ({ children }: any) => {
   const router = useRouter();
-  const { theme } = useTheme();
 
   return (
     <ResizablePanelGroup direction="horizontal" className="w-screen h-screen">
@@ -33,13 +39,7 @@ const AdminDashboard = ({ children }: any) => {
       <ResizablePanel defaultSize={20}>
         <ScrollArea className="h-full p-4">
           <DashboardSidebarTitle
-            icon={
-              theme === "dark" ? (
-                <School size={28} color="#10b981" />
-              ) : (
-                <School size={28} color="#10b981" />
-              )
-            }
+            icon={<School size={28} color="#10b981" />}
             text="MI Raudlatul Athfal"
           />
           <div className="py-2">
@@ -89,29 +89,22 @@ const AdminDashboard = ({ children }: any) => {
             route="hasil-akhir"
             onClick={() => router.push(`/dashboard/data/hasil-akhir`)}
           />
-          <div className="py-2">
-            <h4>User Data</h4>
+          <Separator />
+          <div
+            className="flex items-center gap-4 p-8 h-14 my-2 text-red-800 rounded-lg cursor-pointer  hover:bg-red-300 hover:text-red-800"
+            onClick={() => router.push("/")}
+          >
+            <span className={"font-semibold text-zinc-500 dark:text-zinc-50"}>
+              <LogOut />
+            </span>
+            <p className="text-zinc-500 dark:text-zinc-300">Logout</p>
           </div>
-          <DashboardItem
-            icon={<Box size={20} color="#a1a1aa" />}
-            text="User"
-            route="users"
-            onClick={() => router.push(`/dashboard/data/users`)}
-          />
         </ScrollArea>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      {/* Header */}
-      <ResizablePanel defaultSize={80}>
-        <ResizablePanelGroup direction="vertical">
-          <ResizablePanel defaultSize={10}>
-            <DashboardHeader />
-          </ResizablePanel>
-          {/* Main Content */}
-          <ResizablePanel defaultSize={90} className="h-screen w-full p-6">
-            <ScrollArea className="h-full w-full pr-6">{children}</ScrollArea>
-          </ResizablePanel>
-        </ResizablePanelGroup>
+      {/* Content */}
+      <ResizablePanel defaultSize={90} className="h-screen w-full p-6">
+        <ScrollArea className="h-full w-full pr-6">{children}</ScrollArea>
       </ResizablePanel>
     </ResizablePanelGroup>
   );
