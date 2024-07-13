@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { updateSiswa } from "./action";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Popover,
@@ -36,6 +35,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
+import { updateSiswa } from "../action";
 import { SiswaType } from "@/app/app-utils/models";
 
 const statusSiswa = [
@@ -61,7 +61,7 @@ const formSchema = z.object({
   tanggungan_orang_tua: z.string(),
 });
 
-const FormUpdateUser = ({
+const FormUpdateSiswa = ({
   data,
   onUpdateFinished,
 }: {
@@ -246,4 +246,4 @@ const FormUpdateUser = ({
   );
 };
 
-export default FormUpdateUser;
+export default FormUpdateSiswa;

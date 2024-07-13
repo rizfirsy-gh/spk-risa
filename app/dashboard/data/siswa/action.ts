@@ -65,7 +65,7 @@ export async function addSiswa(data: any) {
   }
 }
 
-export async function updateSiswa(nisn: number, data: any) {
+export async function updateSiswa(nisn: string, data: any) {
   try {
     const token = getToken();
     console.log("token", token);
