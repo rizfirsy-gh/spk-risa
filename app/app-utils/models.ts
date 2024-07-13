@@ -11,3 +11,14 @@ export type SiswaType = {
   penghasilan_orang_tua: number;
   tanggungan_orang_tua: number;
 };
+
+export type HasilAkhirType = {
+  nisn: string;
+  nama_siswa: string;
+  kelas: number;
+  penghasilan_orang_tua: number;
+  tanggungan_orang_tua: number;
+  peringkat: number;
+  total_nilai: number;
+  keterangan: string;
+};

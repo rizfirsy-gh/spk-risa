@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Pencil, Trash } from "lucide-react";
+import { Pencil, RefreshCcw, Trash } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -31,7 +31,6 @@ import FormTambahSiswa from "./components/form-tambah-siswa";
 const SiswaScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [addFormIsOpen, setAddFormIsOpen] = useState(false);
-  const [updateFormIsOpen, setUpdateFormIsOpen] = useState(false);
   const [refetch, setRefetch] = useState(false);
   const [dataSiswa, setDataSiswa] = useState<Array<SiswaType>>([
     {
@@ -63,31 +62,45 @@ const SiswaScreen = () => {
     return () => {
       ignore = true;
     };
-  }, [dataSiswa]);
+  }, [refetch]);
 
   return (
     <section>
       <div className="flex w-full h-full justify-between items-center">
         <h1 className="text-3xl">Data Siswa</h1>
-        <Sheet open={addFormIsOpen} onOpenChange={setAddFormIsOpen}>
-          <SheetTrigger asChild>
-            <Button>Tambah data</Button>
-          </SheetTrigger>
-          <SheetContent className="overflow-y-scroll">
-            <SheetHeader className="mb-8">
-              <SheetTitle>Tambahkan Data Baru</SheetTitle>
-            </SheetHeader>
-            <FormTambahSiswa
-              onPostFinished={(value: boolean) => {
-                setRefetch((value) => !value);
-                setAddFormIsOpen(value);
-              }}
-            />
-          </SheetContent>
-        </Sheet>
+        <div className="flex justify-center gap-1">
+          <Button
+            className="flex gap-2 justify-center"
+            variant={"outline"}
+            onClick={() => setRefetch(true)}
+          >
+            <RefreshCcw size={16} />
+            <span>Refresh</span>
+          </Button>
+          <Sheet open={addFormIsOpen} onOpenChange={setAddFormIsOpen}>
+            <SheetTrigger asChild>
+              <Button>Tambah data</Button>
+            </SheetTrigger>
+            <SheetContent className="overflow-y-scroll">
+              <SheetHeader className="mb-8">
+                <SheetTitle>Tambahkan Data Baru</SheetTitle>
+              </SheetHeader>
+              <FormTambahSiswa
+                onPostFinished={(value: boolean) => {
+                  setRefetch((value) => !value);
+                  setAddFormIsOpen(value);
+                }}
+              />
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
       <div className="mx-4 my-8">
-        <DataTable columns={columnsSiswa} data={dataSiswa} />
+        {isLoading ? (
+          <p>Mengambil data...</p>
+        ) : (
+          <DataTable columns={columnsSiswa} data={dataSiswa} />
+        )}
       </div>
     </section>
   );

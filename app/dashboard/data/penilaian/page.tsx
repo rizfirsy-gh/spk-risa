@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
+import { RefreshCcw } from "lucide-react";
 
 const PenilaianScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +58,14 @@ const PenilaianScreen = () => {
     <section>
       <div className="flex justify-between items-center">
         <h1 className="text-3xl">Data Penilaian</h1>
+        <Button
+          className="flex gap-2 justify-center"
+          variant={"outline"}
+          onClick={() => setRefetch(true)}
+        >
+          <RefreshCcw size={16} />
+          <span>Refresh</span>
+        </Button>
       </div>
       <Card className="mx-4 my-8">
         <CardContent>

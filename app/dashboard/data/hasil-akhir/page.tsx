@@ -21,17 +21,21 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
+import { DataTableHasilAkhir } from "./components/data-table-hasil-akhir";
+import { columnsHasilAkhir } from "./components/columns";
+import { HasilAkhirType } from "@/app/app-utils/models";
+import { RefreshCcw } from "lucide-react";
 
 const HasilAkhirScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [refetch, setRefetch] = useState(false);
-  const [dataHasilAkhir, setDataHasilAkhir] = useState([
+  const [dataHasilAkhir, setDataHasilAkhir] = useState<Array<HasilAkhirType>>([
     {
       nisn: "",
       nama_siswa: "",
       kelas: 1,
-      penghasilan_orang_tua: "",
-      tanggungan_orang_tua: "",
+      penghasilan_orang_tua: 0,
+      tanggungan_orang_tua: 0,
       total_nilai: 0,
       peringkat: 1,
       keterangan: "",
@@ -58,78 +62,25 @@ const HasilAkhirScreen = () => {
 
   return (
     <section>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-4">
         <h1 className="text-3xl">Data Hasil Akhir</h1>
+        <Button
+          className="flex gap-2 justify-center"
+          variant={"outline"}
+          onClick={() => setRefetch(true)}
+        >
+          <RefreshCcw size={16} />
+          <span>Refresh</span>
+        </Button>
       </div>
-      <Card className="mx-4 my-8">
-        <CardContent>
-          <Table>
-            <TableCaption>
-              {dataHasilAkhir.length === 0
-                ? "Data kriteria kosong"
-                : "Tabel Laporan Hasil"}
-            </TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px] text-center">No</TableHead>
-                <TableHead>NISN</TableHead>
-                <TableHead>Nama Siswa</TableHead>
-                <TableHead>Kelas</TableHead>
-                <TableHead>Penghasilan Orang Tua</TableHead>
-                <TableHead>Tanggungan Orang Tua</TableHead>
-                <TableHead>Peringkat</TableHead>
-                <TableHead>Total Nilai</TableHead>
-                <TableHead>Keterangan</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {isLoading ? (
-                <TableRow>
-                  <TableCell colSpan={7} className="h-24 text-center">
-                    Mendapatkan Data...
-                  </TableCell>
-                </TableRow>
-              ) : (
-                dataHasilAkhir.map((data, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium text-center">
-                      {index + 1}
-                    </TableCell>
-                    <TableCell>
-                      {data.nisn === null ? "-" : data.nisn}
-                    </TableCell>
-                    <TableCell>
-                      {data.nama_siswa === null ? "-" : data.nama_siswa}
-                    </TableCell>
-                    <TableCell>
-                      {data.kelas === null ? "-" : data.kelas}
-                    </TableCell>
-                    <TableCell>
-                      {data.penghasilan_orang_tua === null
-                        ? "-"
-                        : data.penghasilan_orang_tua}
-                    </TableCell>
-                    <TableCell>
-                      {data.tanggungan_orang_tua === null
-                        ? "-"
-                        : data.tanggungan_orang_tua}
-                    </TableCell>
-                    <TableCell>
-                      {data.peringkat === null ? "-" : data.peringkat}
-                    </TableCell>
-                    <TableCell>
-                      {data.total_nilai === null ? "-" : data.total_nilai}
-                    </TableCell>
-                    <TableCell>
-                      {data.keterangan === null ? "-" : data.keterangan}
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      {isLoading ? (
+        <p>Mengambil data...</p>
+      ) : (
+        <DataTableHasilAkhir
+          columns={columnsHasilAkhir}
+          data={dataHasilAkhir}
+        />
+      )}
     </section>
   );
 };
