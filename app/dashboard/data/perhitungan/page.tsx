@@ -64,7 +64,7 @@ const PerhitunganScreen = () => {
             <TableCaption>
               {dataPerhitungan.length === 0
                 ? "Data kriteria kosong"
-                : "Daftar hasil perhitungan"}
+                : "Tabel Perhitungan"}
             </TableCaption>
             <TableHeader>
               <TableRow>
@@ -73,7 +73,6 @@ const PerhitunganScreen = () => {
                 <TableHead>Total Nilai</TableHead>
                 <TableHead>Peringkat</TableHead>
                 <TableHead>Keterangan</TableHead>
-                <TableHead>Aksi</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { getDataPenelitian } from "./actions";
+import { getDataPenilaian } from "./actions";
 import {
   Table,
   TableBody,
@@ -38,7 +38,7 @@ const PenilaianScreen = () => {
   useEffect(() => {
     let ignore = false;
     setIsLoading(true);
-    getDataPenelitian().then((result) => {
+    getDataPenilaian().then((result) => {
       console.log("result", result);
       setIsLoading(false);
       if (!ignore && result.status === 200) {
@@ -56,15 +56,15 @@ const PenilaianScreen = () => {
   return (
     <section>
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl">Data Penelitian</h1>
+        <h1 className="text-3xl">Data Penilaian</h1>
       </div>
       <Card className="mx-4 my-8">
         <CardContent>
           <Table>
             <TableCaption>
               {dataPenilaian.length === 0
-                ? "Data kriteria kosong"
-                : "Daftar data kriteria yang tersedia"}
+                ? "Data penilaian kosong"
+                : "Tabel Penilaian"}
             </TableCaption>
             <TableHeader>
               <TableRow>
