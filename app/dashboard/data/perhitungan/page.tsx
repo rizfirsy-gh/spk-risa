@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { getDataPenelitian } from "./actions";
+import { getDataPerhitungan } from "./actions";
 import {
   Table,
   TableBody,
@@ -22,29 +22,29 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 
-const PenilaianScreen = () => {
+const PerhitunganScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [refetch, setRefetch] = useState(false);
-  const [dataPenilaian, setDataPenilaian] = useState([
+  const [dataPerhitungan, setDataPerhitungan] = useState([
     {
-      kode_kriteria: 0,
-      nama_kriteria: "",
-      jenis: "",
-      bobot: null,
-      tingkat_prioritas: 0,
+      id_perhitungan: 1,
+      nisn: "",
+      total_nilai: 0,
+      peringkat: 1,
+      keterangan: "",
     },
   ]);
 
   useEffect(() => {
     let ignore = false;
     setIsLoading(true);
-    getDataPenelitian().then((result) => {
+    getDataPerhitungan().then((result) => {
       console.log("result", result);
       setIsLoading(false);
       if (!ignore && result.status === 200) {
-        setDataPenilaian(result.data);
+        setDataPerhitungan(result.data);
       } else {
-        setDataPenilaian([]);
+        setDataPerhitungan([]);
       }
     });
 
@@ -56,26 +56,23 @@ const PenilaianScreen = () => {
   return (
     <section>
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl">Data Penelitian</h1>
+        <h1 className="text-3xl">Data Perhitungan</h1>
       </div>
       <Card className="mx-4 my-8">
         <CardContent>
           <Table>
             <TableCaption>
-              {dataPenilaian.length === 0
+              {dataPerhitungan.length === 0
                 ? "Data kriteria kosong"
-                : "Daftar data kriteria yang tersedia"}
+                : "Daftar hasil perhitungan"}
             </TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Kode Penilaian</TableHead>
-                <TableHead>Nama Penilaian</TableHead>
-                <TableHead>Jenis</TableHead>
-                <TableHead>Bobot</TableHead>
-                <TableHead>Tingkat Prioritas</TableHead>
-                <TableHead>
-                  <span className="ml-4">Urutan</span>
-                </TableHead>
+                <TableHead className="w-[100px] text-center">Kode</TableHead>
+                <TableHead>NISN</TableHead>
+                <TableHead>Total Nilai</TableHead>
+                <TableHead>Peringkat</TableHead>
+                <TableHead>Keterangan</TableHead>
                 <TableHead>Aksi</TableHead>
               </TableRow>
             </TableHeader>
@@ -87,26 +84,22 @@ const PenilaianScreen = () => {
                   </TableCell>
                 </TableRow>
               ) : (
-                dataPenilaian.map((data, index) => (
+                dataPerhitungan.map((data, index) => (
                   <TableRow key={index}>
                     <TableCell className="font-medium text-center">
-                      {data.kode_kriteria === null
-                        ? "-"
-                        : "C" + data.kode_kriteria}
+                      {data.id_perhitungan === null ? "-" : data.id_perhitungan}
                     </TableCell>
                     <TableCell>
-                      {data.nama_kriteria === null ? "-" : data.nama_kriteria}
+                      {data.nisn === null ? "-" : data.nisn}
                     </TableCell>
                     <TableCell>
-                      {data.jenis === null ? "-" : data.jenis}
+                      {data.total_nilai === null ? "-" : data.total_nilai}
                     </TableCell>
                     <TableCell>
-                      {data.bobot === null ? "-" : data.bobot}
+                      {data.peringkat === null ? "-" : data.peringkat}
                     </TableCell>
                     <TableCell>
-                      {data.tingkat_prioritas === null
-                        ? "-"
-                        : data.tingkat_prioritas}
+                      {data.keterangan === null ? "-" : data.keterangan}
                     </TableCell>
                   </TableRow>
                 ))
@@ -119,4 +112,4 @@ const PenilaianScreen = () => {
   );
 };
 
-export default PenilaianScreen;
+export default PerhitunganScreen;
