@@ -52,8 +52,8 @@ const KepalaSekolahScreen = () => {
           <Table>
             <TableCaption>
               {dataKepalaSekolah && dataKepalaSekolah.length === 0
-                ? "Data kriteria kosong"
-                : ""}
+                ? "Data kosong"
+                : "Tabel Kepala Sekolah"}
             </TableCaption>
             <TableHeader>
               <TableRow>

@@ -1,14 +1,17 @@
 import { getToken } from "@/app/app-utils/auth";
 
-export async function getDataPenilaian() {
+export async function getDataHasilAkhir() {
   try {
     const token = getToken();
     console.log("token", token);
-    const res = await fetch("http://localhost:4008/api/penilaian", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetch(
+      "http://localhost:4008/api/perhitungan/laporan-hasil",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const json = res.json();
 

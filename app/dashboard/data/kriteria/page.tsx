@@ -65,7 +65,7 @@ const KriteriaScreen = () => {
             <TableCaption>
               {dataKriteria.length === 0
                 ? "Data kriteria kosong"
-                : "Daftar data kriteria yang tersedia"}
+                : "Tabel Kriteria"}
             </TableCaption>
             <TableHeader>
               <TableRow>

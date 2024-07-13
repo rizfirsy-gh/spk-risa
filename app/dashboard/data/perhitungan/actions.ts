@@ -1,10 +1,10 @@
 import { getToken } from "@/app/app-utils/auth";
 
-export async function getDataPenilaian() {
+export async function getDataPerhitungan() {
   try {
     const token = getToken();
     console.log("token", token);
-    const res = await fetch("http://localhost:4008/api/penilaian", {
+    const res = await fetch("http://localhost:4008/api/perhitungan", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
