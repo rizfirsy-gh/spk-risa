@@ -25,8 +25,8 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { useToast } from "@/components/ui/use-toast";
-import { addSiswa } from "./action";
 import { Textarea } from "@/components/ui/textarea";
+import { addSiswa } from "../action";
 
 const formSchema = z.object({
   nisn: z.string().min(5),
@@ -37,7 +37,7 @@ const formSchema = z.object({
   }),
 });
 
-const FormTambahUser = ({
+const FormTambahSiswa = ({
   onPostFinished,
 }: {
   onPostFinished: (isClosed: boolean) => void;
@@ -186,4 +186,4 @@ const FormTambahUser = ({
   );
 };
 
-export default FormTambahUser;
+export default FormTambahSiswa;

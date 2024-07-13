@@ -8,7 +8,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import FormTambahUser from "./form-tambah-user";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Pencil, Trash } from "lucide-react";
@@ -24,10 +23,10 @@ import {
 } from "@/components/ui/table";
 import { deleteSiswa, getDataSiswa, updateOrder } from "./action";
 import { convertMonth } from "@/app/app-utils/post_data";
-import FormUpdateUser from "./form-update-user";
 import { DataTable } from "./components/data-table";
 import { columnsSiswa } from "./components/columns";
 import { SiswaType } from "@/app/app-utils/models";
+import FormTambahSiswa from "./components/form-tambah-siswa";
 
 const SiswaScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +63,7 @@ const SiswaScreen = () => {
     return () => {
       ignore = true;
     };
-  }, [refetch]);
+  }, [dataSiswa]);
 
   return (
     <section>
@@ -78,7 +77,7 @@ const SiswaScreen = () => {
             <SheetHeader className="mb-8">
               <SheetTitle>Tambahkan Data Baru</SheetTitle>
             </SheetHeader>
-            <FormTambahUser
+            <FormTambahSiswa
               onPostFinished={(value: boolean) => {
                 setRefetch((value) => !value);
                 setAddFormIsOpen(value);

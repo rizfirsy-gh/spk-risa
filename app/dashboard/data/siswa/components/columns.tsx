@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/sheet";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil, Trash } from "lucide-react";
-import FormUpdateUser from "../form-update-user";
 import { useState } from "react";
 import { deleteSiswa } from "../action";
 import { useToast } from "@/components/ui/use-toast";
@@ -85,10 +84,16 @@ export const columnsSiswa: ColumnDef<SiswaType>[] = [
     accessorKey: "penghasilan_orang_tua",
     header: "Penghasilan Orang Tua",
     cell: ({ row }) => {
+      const penghasilan: number = row.getValue("penghasilan_orang_tua");
+      const rupiah = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      });
+
       return (
         <p>
           {row.getValue("penghasilan_orang_tua")
-            ? row.getValue("penghasilan_orang_tua")
+            ? rupiah.format(penghasilan)
             : "-"}
         </p>
       );
@@ -101,7 +106,7 @@ export const columnsSiswa: ColumnDef<SiswaType>[] = [
       return (
         <p>
           {row.getValue("tanggungan_orang_tua")
-            ? row.getValue("penghasilan_orang_tua")
+            ? row.getValue("tanggungan_orang_tua")
             : "-"}
         </p>
       );
