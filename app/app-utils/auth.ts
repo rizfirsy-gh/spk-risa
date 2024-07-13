@@ -54,6 +54,6 @@ export async function login(data: any) {
   };
 }
 
-export function userLogout() {
+export function logout() {
   localStorage.clear();
 }

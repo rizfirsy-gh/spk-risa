@@ -29,6 +29,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { logout } from "@/app/app-utils/auth";
 
 const AdminDashboard = ({ children }: any) => {
   const router = useRouter();
@@ -92,7 +93,10 @@ const AdminDashboard = ({ children }: any) => {
           <Separator />
           <div
             className="flex items-center gap-4 p-8 h-14 my-2 text-red-800 rounded-lg cursor-pointer  hover:bg-red-300 hover:text-red-800"
-            onClick={() => router.push("/")}
+            onClick={() => {
+              logout();
+              router.push("/");
+            }}
           >
             <span className={"font-semibold text-zinc-500 dark:text-zinc-50"}>
               <LogOut />

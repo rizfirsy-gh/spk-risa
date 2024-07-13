@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getDataKepsek } from "./actions";
 
 const KepalaSekolahScreen = () => {
@@ -44,52 +44,26 @@ const KepalaSekolahScreen = () => {
 
   return (
     <section>
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl">Data Kriteria</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-3xl">Kepala Sekolah</h1>
       </div>
-      <Card className="mx-4 my-8">
-        <CardContent>
-          <Table>
-            <TableCaption>
-              {dataKepalaSekolah && dataKepalaSekolah.length === 0
-                ? "Data kosong"
-                : "Tabel Kepala Sekolah"}
-            </TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="font-bold text-center w-[100px]">
-                  ID
-                </TableHead>
-                <TableHead>Username</TableHead>
-                <TableHead>Nama</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {isLoading ? (
-                <TableRow>
-                  <TableCell colSpan={7} className="h-24 text-center">
-                    Mendapatkan Data...
-                  </TableCell>
-                </TableRow>
-              ) : (
-                dataKepalaSekolah.map((data, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-bold text-center">
-                      {data.id_kepsek === null ? "-" : "C" + data.id_kepsek}
-                    </TableCell>
-                    <TableCell>
-                      {data.username === null ? "-" : data.username}
-                    </TableCell>
-                    <TableCell>
-                      {data.nama_kepsek === null ? "-" : data.nama_kepsek}
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      {isLoading ? (
+        <p>Mendapatkan data...</p>
+      ) : (
+        dataKepalaSekolah.map((data, index) => (
+          <Card className="w-[400px]">
+            <CardHeader className="font-semibold text-md">
+              {data.nama_kepsek === null ? "-" : data.nama_kepsek}
+            </CardHeader>
+            <CardContent>
+              <p>{data.id_kepsek === null ? "-" : "ID: " + data.id_kepsek}</p>
+              <p>
+                {data.username === null ? "-" : "Username: " + data.username}
+              </p>
+            </CardContent>
+          </Card>
+        ))
+      )}
     </section>
   );
 };

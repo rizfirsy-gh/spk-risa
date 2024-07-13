@@ -29,6 +29,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { logout } from "@/app/app-utils/auth";
 
 const KepsekDashboard = ({ children }: any) => {
   const router = useRouter();
@@ -55,6 +56,18 @@ const KepsekDashboard = ({ children }: any) => {
           </div>
           <DashboardItem
             icon={<FileLineChart size={20} color="#a1a1aa" />}
+            text="Kepala Sekolah"
+            route="kepala-sekolah"
+            onClick={() => router.push(`/dashboard/data/kepala-sekolah`)}
+          />
+          <DashboardItem
+            icon={<FileLineChart size={20} color="#a1a1aa" />}
+            text="Siswa"
+            route="siswa"
+            onClick={() => router.push(`/dashboard/data/siswa`)}
+          />
+          <DashboardItem
+            icon={<FileLineChart size={20} color="#a1a1aa" />}
             text="Hasil akhir"
             route="hasil-akhir"
             onClick={() => router.push(`/dashboard/data/hasil-akhir`)}
@@ -62,7 +75,10 @@ const KepsekDashboard = ({ children }: any) => {
           <Separator />
           <div
             className="flex items-center gap-4 p-8 h-14 my-2 text-red-800 rounded-lg cursor-pointer  hover:bg-red-300 hover:text-red-800"
-            onClick={() => router.push("/")}
+            onClick={() => {
+              logout();
+              router.push("/");
+            }}
           >
             <span className={"font-semibold text-zinc-500 dark:text-zinc-50"}>
               <LogOut />
