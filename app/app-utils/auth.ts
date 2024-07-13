@@ -31,8 +31,6 @@ export async function login(data: any) {
     },
   });
 
-  console.log("res", res);
-
   const json = await res.json();
 
   if (res.status == 200) {
