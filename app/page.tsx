@@ -25,12 +25,13 @@ import { Card } from "@/components/ui/card";
 
 const formSchema = z.object({
   username: z.string().min(4).max(50),
-  password: z.string().min(8).max(50),
+  password: z.string().min(5).max(50),
 });
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const token = getToken();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,22 +41,6 @@ export default function Home() {
       password: "",
     },
   });
-
-  useEffect(() => {
-    let ignore = false;
-    const token = getToken();
-    if (!ignore) {
-      if (token) {
-        router.push("/dashboard");
-      } else {
-        router.push("/");
-      }
-    }
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
 
   async function onSubmit(value: z.infer<typeof formSchema>) {
     const res = await login(value);
@@ -69,6 +54,10 @@ export default function Home() {
       });
     }
     router.push("/redirect/");
+  }
+
+  if (token) {
+    router.push("/dashboard");
   }
 
   return (

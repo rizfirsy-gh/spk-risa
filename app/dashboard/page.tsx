@@ -1,13 +1,13 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { checkUserRole } from "../app-utils/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const role = checkUserRole();
   const route = useRouter();
+  const role = checkUserRole();
 
   if (role === "adm") {
     return (
@@ -113,8 +113,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       </div>
     );
   }
-
-  route.push("/");
 };
 
 export default DashboardLayout;

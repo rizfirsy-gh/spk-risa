@@ -9,7 +9,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { getDataPerhitungan } from "./actions";
+import {
+  generateDataPerhitungan,
+  getDataPerhitungan,
+  validateDataPerhitungan,
+} from "./actions";
 import {
   Table,
   TableBody,
@@ -21,6 +25,8 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
+import { RefreshCcw } from "lucide-react";
+import { checkUserRole } from "@/app/app-utils/auth";
 
 const PerhitunganScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +40,9 @@ const PerhitunganScreen = () => {
       keterangan: "",
     },
   ]);
+  const role = checkUserRole();
+
+  console.log("role", role);
 
   useEffect(() => {
     let ignore = false;
@@ -57,6 +66,32 @@ const PerhitunganScreen = () => {
     <section>
       <div className="flex justify-between items-center">
         <h1 className="text-3xl">Data Perhitungan</h1>
+        {role === "adm" && (
+          <Button
+            className="flex gap-2 justify-center"
+            variant={"outline"}
+            onClick={() => {
+              setRefetch(true);
+              generateDataPerhitungan();
+            }}
+          >
+            <RefreshCcw size={16} />
+            <span>Generate</span>
+          </Button>
+        )}
+        {role === "kps" && (
+          <Button
+            className="flex gap-2 justify-center"
+            variant={"outline"}
+            onClick={() => {
+              setRefetch(true);
+              validateDataPerhitungan();
+            }}
+          >
+            <RefreshCcw size={16} />
+            <span>Validasi data ini</span>
+          </Button>
+        )}
       </div>
       <Card className="mx-4 my-8">
         <CardContent>

@@ -71,9 +71,14 @@ export const columnsSiswa: ColumnDef<SiswaType>[] = [
     header: "Tanggal Lahir",
     cell: ({ row }) => {
       if (row.getValue("tanggal_lahir")) {
-        const date = new Date(row.getValue("tanggal_lahir"));
-        const month = convertMonth(date.getMonth());
-        const tanggalLahir = `${date.getDay()} ${month} ${date.getFullYear()}`;
+        const utcDate: string = row.getValue("tanggal_lahir");
+        const localDate = new Date(utcDate);
+        const date = localDate.getDate();
+        const month = convertMonth(localDate.getMonth() + 1);
+        const year = localDate.getFullYear();
+        const tanggalLahir = `${date} ${month} ${year}`;
+
+        console.log("localDate.getDay()", localDate.getDate() + 1);
 
         return <p>{tanggalLahir}</p>;
       }

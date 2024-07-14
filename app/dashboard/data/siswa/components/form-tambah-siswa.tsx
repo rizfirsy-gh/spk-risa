@@ -29,7 +29,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { addSiswa } from "../action";
 
 const formSchema = z.object({
-  nisn: z.string().min(5),
+  nisn: z.string().min(5).max(10),
   nama_siswa: z.string().min(5),
   tempat_lahir: z.string().min(5),
   tanggal_lahir: z.date({
@@ -51,18 +51,21 @@ const FormTambahSiswa = ({
       nisn: "",
       nama_siswa: "",
       tempat_lahir: "",
-      tanggal_lahir: new Date("2018-12-01"),
+      tanggal_lahir: new Date(),
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const date = new Date(values.tanggal_lahir);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
     const newData = {
       nisn: values.nisn,
       nama_siswa: values.nama_siswa,
       tempat_lahir: values.tempat_lahir,
-      tanggal_lahir: values.tanggal_lahir,
+      tanggal_lahir: new Date(`${year}-${month}-${day}`),
     };
-    console.log("values", values);
 
     const res = await addSiswa(newData);
 
@@ -164,7 +167,7 @@ const FormTambahSiswa = ({
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date: any) =>
-                        date > new Date() || date < new Date("1900-01-01")
+                        date > new Date() || date < new Date("2004-01-01")
                       }
                       initialFocus
                     />

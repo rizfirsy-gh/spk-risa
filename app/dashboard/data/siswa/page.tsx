@@ -27,6 +27,7 @@ import { DataTable } from "./components/data-table";
 import { columnsSiswa } from "./components/columns";
 import { SiswaType } from "@/app/app-utils/models";
 import FormTambahSiswa from "./components/form-tambah-siswa";
+import { checkUserRole } from "@/app/app-utils/auth";
 
 const SiswaScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +46,7 @@ const SiswaScreen = () => {
       tanggungan_orang_tua: 0,
     },
   ]);
+  const role = checkUserRole();
 
   useEffect(() => {
     let ignore = false;
@@ -77,22 +79,24 @@ const SiswaScreen = () => {
             <RefreshCcw size={16} />
             <span>Refresh</span>
           </Button>
-          <Sheet open={addFormIsOpen} onOpenChange={setAddFormIsOpen}>
-            <SheetTrigger asChild>
-              <Button>Tambah data</Button>
-            </SheetTrigger>
-            <SheetContent className="overflow-y-scroll">
-              <SheetHeader className="mb-8">
-                <SheetTitle>Tambahkan Data Baru</SheetTitle>
-              </SheetHeader>
-              <FormTambahSiswa
-                onPostFinished={(value: boolean) => {
-                  setRefetch((value) => !value);
-                  setAddFormIsOpen(value);
-                }}
-              />
-            </SheetContent>
-          </Sheet>
+          {role === "adm" && (
+            <Sheet open={addFormIsOpen} onOpenChange={setAddFormIsOpen}>
+              <SheetTrigger asChild>
+                <Button>Tambah data</Button>
+              </SheetTrigger>
+              <SheetContent className="overflow-y-scroll">
+                <SheetHeader className="mb-8">
+                  <SheetTitle>Tambahkan Data Baru</SheetTitle>
+                </SheetHeader>
+                <FormTambahSiswa
+                  onPostFinished={(value: boolean) => {
+                    setRefetch((value) => !value);
+                    setAddFormIsOpen(value);
+                  }}
+                />
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
       </div>
       <div className="mx-4 my-8">
