@@ -22,19 +22,12 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { RefreshCcw } from "lucide-react";
+import { PenilaianType } from "@/app/app-utils/models";
 
 const PenilaianScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [refetch, setRefetch] = useState(false);
-  const [dataPenilaian, setDataPenilaian] = useState([
-    {
-      kode_kriteria: 0,
-      nama_kriteria: "",
-      jenis: "",
-      bobot: null,
-      tingkat_prioritas: 0,
-    },
-  ]);
+  const [dataPenilaian, setDataPenilaian] = useState<Array<PenilaianType>>([]);
 
   useEffect(() => {
     let ignore = false;
@@ -77,15 +70,13 @@ const PenilaianScreen = () => {
             </TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Kode Penilaian</TableHead>
-                <TableHead>Nama Penilaian</TableHead>
-                <TableHead>Jenis</TableHead>
+                <TableHead className="w-[100px]">NISN</TableHead>
+                <TableHead>Nama Siswa</TableHead>
+                <TableHead>Kelas</TableHead>
+                <TableHead>Penghasilan Orang Tua</TableHead>
+                <TableHead>Tanggungan Orang Tua</TableHead>
                 <TableHead>Bobot</TableHead>
-                <TableHead>Tingkat Prioritas</TableHead>
-                <TableHead>
-                  <span className="ml-4">Urutan</span>
-                </TableHead>
-                <TableHead>Aksi</TableHead>
+                <TableHead>Kategori Bobot</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -99,23 +90,29 @@ const PenilaianScreen = () => {
                 dataPenilaian.map((data, index) => (
                   <TableRow key={index}>
                     <TableCell className="font-medium text-center">
-                      {data.kode_kriteria === null
+                      {data.nisn === null ? "-" : data.nisn}
+                    </TableCell>
+                    <TableCell>
+                      {data.nama_siswa === null ? "-" : data.nama_siswa}
+                    </TableCell>
+                    <TableCell>
+                      {data.kelas === null ? "-" : data.kelas}
+                    </TableCell>
+                    <TableCell>
+                      {data.penghasilan_orang_tua === null
                         ? "-"
-                        : "C" + data.kode_kriteria}
+                        : data.penghasilan_orang_tua}
                     </TableCell>
                     <TableCell>
-                      {data.nama_kriteria === null ? "-" : data.nama_kriteria}
-                    </TableCell>
-                    <TableCell>
-                      {data.jenis === null ? "-" : data.jenis}
+                      {data.tanggungan_orang_tua === null
+                        ? "-"
+                        : data.tanggungan_orang_tua}
                     </TableCell>
                     <TableCell>
                       {data.bobot === null ? "-" : data.bobot}
                     </TableCell>
                     <TableCell>
-                      {data.tingkat_prioritas === null
-                        ? "-"
-                        : data.tingkat_prioritas}
+                      {data.kategori_bobot === null ? "-" : data.kategori_bobot}
                     </TableCell>
                   </TableRow>
                 ))

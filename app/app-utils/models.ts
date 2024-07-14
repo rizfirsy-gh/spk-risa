@@ -22,3 +22,14 @@ export type HasilAkhirType = {
   total_nilai: number;
   keterangan: string;
 };
+
+export type PenilaianType = {
+  id: string;
+  nisn: string;
+  nama_siswa: string;
+  penghasilan_orang_tua: number;
+  tanggungan_orang_tua: number;
+  kelas: number;
+  bobot: number;
+  kategori_bobot: string;
+};

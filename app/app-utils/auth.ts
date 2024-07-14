@@ -5,12 +5,17 @@ export function checkUserRole() {
   return localStorage.getItem("user_role");
 }
 
+export function getNisn() {
+  return localStorage.getItem("nisn");
+}
+
 export function getToken() {
   return localStorage.getItem("token");
 }
 
 type DecodedTokenType = {
   id: "string";
+  nisn: "string";
   username: "string";
   nama: "string";
   kode_role: "string";
@@ -37,6 +42,7 @@ export async function login(data: any) {
     const decoded = decodeToken(json.data.token);
     localStorage.setItem("token", json.data.token);
     localStorage.setItem("user_role", decoded.kode_role);
+    localStorage.setItem("user_role", decoded.nisn);
     localStorage.setItem("user_id", decoded.id);
 
     return {

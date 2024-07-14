@@ -27,6 +27,7 @@ export async function generateDataPerhitungan() {
     const res = await fetch("http://localhost:4008/api/perhitungan", {
       method: "PATCH",
       headers: {
+        "content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -48,6 +49,7 @@ export async function validateDataPerhitungan() {
     const res = await fetch("http://localhost:4008/api/perhitungan/validasi", {
       method: "PATCH",
       headers: {
+        "content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });

@@ -69,15 +69,8 @@ const KriteriaScreen = () => {
             </TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Kode Kriteria</TableHead>
+                <TableHead>Kode Kriteria</TableHead>
                 <TableHead>Nama Kriteria</TableHead>
-                <TableHead>Jenis</TableHead>
-                <TableHead>Bobot</TableHead>
-                <TableHead>Tingkat Prioritas</TableHead>
-                <TableHead>
-                  <span className="ml-4">Urutan</span>
-                </TableHead>
-                <TableHead>Aksi</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -97,17 +90,6 @@ const KriteriaScreen = () => {
                     </TableCell>
                     <TableCell>
                       {data.nama_kriteria === null ? "-" : data.nama_kriteria}
-                    </TableCell>
-                    <TableCell>
-                      {data.jenis === null ? "-" : data.jenis}
-                    </TableCell>
-                    <TableCell>
-                      {data.bobot === null ? "-" : data.bobot}
-                    </TableCell>
-                    <TableCell>
-                      {data.tingkat_prioritas === null
-                        ? "-"
-                        : data.tingkat_prioritas}
                     </TableCell>
                   </TableRow>
                 ))

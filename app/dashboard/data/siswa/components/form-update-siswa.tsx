@@ -54,6 +54,9 @@ const statusSiswa = [
 ];
 
 const formSchema = z.object({
+  nama_siswa: z.string(),
+  tempat_lahir: z.string(),
+  tanggal_lahir: z.date(),
   kelas: z.string().min(1).max(1),
   alamat: z.string().min(5),
   status: z.string(),
@@ -74,8 +77,11 @@ const FormUpdateSiswa = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      kelas: data.kelas ? data.kelas.toString() : "0",
+      nama_siswa: data.nama_siswa,
+      tempat_lahir: data.tempat_lahir,
+      tanggal_lahir: new Date(data.tanggal_lahir),
       alamat: data.alamat,
+      kelas: data.kelas ? data.kelas.toString() : "0",
       status: data.status,
       penghasilan_orang_tua: data.penghasilan_orang_tua
         ? data.penghasilan_orang_tua.toString()
@@ -88,6 +94,9 @@ const FormUpdateSiswa = ({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const newData = {
+      nama_siswa: values.nama_siswa,
+      tempat_lahir: values.tempat_lahir,
+      tanggal_lahir: values.tanggal_lahir,
       kelas: Number(values.kelas),
       alamat: values.alamat,
       status: values.status,
@@ -117,6 +126,84 @@ const FormUpdateSiswa = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="mb-4">
+          <FormField
+            control={form.control}
+            name="nama_siswa"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nama</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="mb-4">
+          <FormField
+            control={form.control}
+            name="tempat_lahir"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tempat Lahir</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="mb-4">
+          <FormField
+            control={form.control}
+            name="tanggal_lahir"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Tanggal lahir</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[240px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pilih tanggal</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      toYear={2004}
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date: any) =>
+                        date > new Date() || date < new Date("2004-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormDescription>
+                  Tanggal lahir yang diizinkan maksimal tahun 2004
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="mb-4">
           <FormField
             control={form.control}

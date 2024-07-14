@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { checkUserRole } from "../app-utils/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import SiswaScreen from "./data/siswa/page";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const route = useRouter();
@@ -112,6 +113,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </section>
       </div>
     );
+  }
+  if (role === "ssw") {
+    return <SiswaScreen />;
   }
 };
 

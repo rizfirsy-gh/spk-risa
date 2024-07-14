@@ -16,6 +16,9 @@ import { deleteSiswa } from "../action";
 import { useToast } from "@/components/ui/use-toast";
 import FormUpdateSiswa from "./form-update-siswa";
 import { SiswaType } from "@/app/app-utils/models";
+import { checkUserRole } from "@/app/app-utils/auth";
+
+const role = checkUserRole();
 
 export const columnsSiswa: ColumnDef<SiswaType>[] = [
   {
@@ -117,12 +120,14 @@ export const columnsSiswa: ColumnDef<SiswaType>[] = [
       );
     },
   },
-  {
+];
+
+if (role === "adm") {
+  columnsSiswa.push({
     id: "actions",
     cell: ({ row }) => {
       const [updateFormIsOpen, setUpdateFormIsOpen] = useState(false);
       const { toast } = useToast();
-
       return (
         <div className="flex items-center gap-2">
           <Sheet open={updateFormIsOpen} onOpenChange={setUpdateFormIsOpen}>
@@ -160,5 +165,5 @@ export const columnsSiswa: ColumnDef<SiswaType>[] = [
         </div>
       );
     },
-  },
-];
+  });
+}

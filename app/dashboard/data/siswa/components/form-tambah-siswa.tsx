@@ -35,6 +35,7 @@ const formSchema = z.object({
   tanggal_lahir: z.date({
     required_error: "Tanggal Lahir belum dipilih",
   }),
+  password: z.string().min(6),
 });
 
 const FormTambahSiswa = ({
@@ -42,6 +43,7 @@ const FormTambahSiswa = ({
 }: {
   onPostFinished: (isClosed: boolean) => void;
 }) => {
+  const [maxBirthYear, setMaxBirthYear] = useState(2013);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -52,6 +54,7 @@ const FormTambahSiswa = ({
       nama_siswa: "",
       tempat_lahir: "",
       tanggal_lahir: new Date(),
+      password: "",
     },
   });
 
@@ -60,11 +63,15 @@ const FormTambahSiswa = ({
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
+    const generatedPassword = `${day}${month}${year.toString().slice(2)}`;
+
+    console.log("generatedPassword" + generatedPassword);
     const newData = {
       nisn: values.nisn,
       nama_siswa: values.nama_siswa,
       tempat_lahir: values.tempat_lahir,
       tanggal_lahir: new Date(`${year}-${month}-${day}`),
+      password: values.password,
     };
 
     const res = await addSiswa(newData);
@@ -162,20 +169,35 @@ const FormTambahSiswa = ({
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
-                      toYear={2004}
+                      toYear={maxBirthYear}
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date: any) =>
-                        date > new Date() || date < new Date("2004-01-01")
+                        date > new Date(`${maxBirthYear}-12-31`)
                       }
                       initialFocus
                     />
                   </PopoverContent>
                 </Popover>
                 <FormDescription>
-                  Tanggal lahir yang diizinkan maksimal tahun 2004
+                  Tanggal lahir yang diizinkan maksimal tahun {maxBirthYear}
                 </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="mb-4">
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

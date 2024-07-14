@@ -1,4 +1,4 @@
-import { getToken } from "@/app/app-utils/auth";
+import { getNisn, getToken } from "@/app/app-utils/auth";
 
 export async function getDataSiswa() {
   try {
@@ -9,6 +9,30 @@ export async function getDataSiswa() {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    const json = res.json();
+
+    console.log("json", json);
+
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getSiswaByNisn() {
+  try {
+    const token = getToken();
+    const nisn = getNisn();
+    console.log("token", token);
+    const res = await fetch(
+      `http://localhost:4008/api/account-users/siswa/${nisn}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const json = res.json();
 
@@ -71,7 +95,7 @@ export async function updateSiswa(nisn: string, data: any) {
     console.log("token", token);
     console.log("data", data);
     const res = await fetch(
-      `http://localhost:4008/api/account-users/profile-siswa/${nisn}`,
+      `http://localhost:4008/api/account-users/update-siswa/${nisn}`,
       {
         method: "PATCH",
         body: JSON.stringify(data),
