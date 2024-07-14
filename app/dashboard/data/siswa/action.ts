@@ -24,9 +24,9 @@ export async function getSiswaByNisn() {
   try {
     const token = getToken();
     const nisn = getNisn();
-    console.log("token", token);
+    console.log("nisn", nisn);
     const res = await fetch(
-      `http://localhost:4008/api/account-users/siswa/${nisn}`,
+      `http://localhost:4008/api/account-users/siswa-detail/${nisn}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -34,11 +34,7 @@ export async function getSiswaByNisn() {
       }
     );
 
-    const json = res.json();
-
-    console.log("json", json);
-
-    return json;
+    return await res.json();
   } catch (error) {
     return error;
   }
@@ -96,6 +92,33 @@ export async function updateSiswa(nisn: string, data: any) {
     console.log("data", data);
     const res = await fetch(
       `http://localhost:4008/api/account-users/update-siswa/${nisn}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(data),
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const json = res.json();
+
+    console.log("json", json);
+
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function updateProfileSiswa(nisn: string, data: any) {
+  try {
+    const token = getToken();
+    console.log("token", token);
+    console.log("data", data);
+    const res = await fetch(
+      `http://localhost:4008/api/account-users/profile-siswa/${nisn}`,
       {
         method: "PATCH",
         body: JSON.stringify(data),

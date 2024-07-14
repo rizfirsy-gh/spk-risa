@@ -51,7 +51,19 @@ const SiswaScreen = () => {
     tanggungan_orang_tua: 0,
     tempat_lahir: "",
   });
-  const [dataSiswa, setDataSiswa] = useState<Array<SiswaType>>([]);
+  const [dataSiswa, setDataSiswa] = useState<Array<SiswaType>>([
+    {
+      nisn: "",
+      nama_siswa: "",
+      alamat: "",
+      kelas: 1,
+      penghasilan_orang_tua: 0,
+      status: "",
+      tanggal_lahir: "",
+      tanggungan_orang_tua: 0,
+      tempat_lahir: "",
+    },
+  ]);
   const role = checkUserRole();
 
   useEffect(() => {
@@ -59,22 +71,14 @@ const SiswaScreen = () => {
     setIsLoading(true);
 
     if (role === "ssw") {
-      getSiswaByNisn().then((result) => {
+      getSiswaByNisn().then(({ data }) => {
         setIsLoading(false);
-        if (!ignore && result.status === 200) {
-          setDataSiswa(result.data);
-        } else {
-          setDataSiswa([]);
-        }
+        setSiswa(data);
       });
     } else {
       getDataSiswa().then((result) => {
         setIsLoading(false);
-        if (!ignore && result.status === 200) {
-          setDataSiswa(result.data);
-        } else {
-          setDataSiswa([]);
-        }
+        setDataSiswa(result.data);
       });
     }
 
@@ -87,7 +91,7 @@ const SiswaScreen = () => {
     return (
       <section>
         <div className="flex w-full h-full justify-between items-center">
-          <h1 className="text-3xl">Data Siswa</h1>
+          <h1 className="text-3xl">Selamat datang</h1>
           <div className="flex justify-center gap-1">
             <Button
               className="flex gap-2 justify-center"
@@ -99,7 +103,7 @@ const SiswaScreen = () => {
             </Button>
             <Sheet open={addFormIsOpen} onOpenChange={setAddFormIsOpen}>
               <SheetTrigger asChild>
-                <Button>Tambah data</Button>
+                <Button>Lengkapi data</Button>
               </SheetTrigger>
               <SheetContent className="overflow-y-scroll">
                 <SheetHeader className="mb-8">
@@ -116,7 +120,7 @@ const SiswaScreen = () => {
             </Sheet>
           </div>
         </div>
-        <Separator />
+        <Separator className="my-8" />
         <Card>
           <CardHeader>{siswa?.nama_siswa}</CardHeader>
           <CardContent>
@@ -125,8 +129,13 @@ const SiswaScreen = () => {
                 <TableRow>
                   <TableHead>Nama</TableHead>
                   <TableHead>NISN</TableHead>
-                  <TableHead>Method</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
+                  <TableHead>Tempat Lahir</TableHead>
+                  <TableHead>Tanggal Lahir</TableHead>
+                  <TableHead>Alamat</TableHead>
+                  <TableHead>Kelas</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Penghasilan Orang Tua</TableHead>
+                  <TableHead>Tanggungan Orang Tua</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -135,8 +144,21 @@ const SiswaScreen = () => {
                     {siswa?.nama_siswa}
                   </TableCell>
                   <TableCell>{siswa?.nisn}</TableCell>
-                  <TableCell>Credit Card</TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
+                  <TableCell>{siswa?.tempat_lahir}</TableCell>
+                  <TableCell>{siswa?.tanggal_lahir}</TableCell>
+                  <TableCell>{siswa.alamat ? siswa.alamat : "-"}</TableCell>
+                  <TableCell>{siswa.kelas ? siswa.kelas : "-"}</TableCell>
+                  <TableCell>{siswa.status ? siswa.status : "-"}</TableCell>
+                  <TableCell>
+                    {siswa.penghasilan_orang_tua
+                      ? siswa.penghasilan_orang_tua
+                      : "-"}
+                  </TableCell>
+                  <TableCell>
+                    {siswa.tanggungan_orang_tua
+                      ? siswa.tanggungan_orang_tua
+                      : "-"}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
