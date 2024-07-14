@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Pencil, RefreshCcw, Trash } from "lucide-react";
+import { FileCheck, LogOut, Pencil, RefreshCcw, Trash } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Table,
@@ -32,9 +32,11 @@ import { DataTable } from "./components/data-table";
 import { columnsSiswa } from "./components/columns";
 import { SiswaType } from "@/app/app-utils/models";
 import FormTambahSiswa from "./components/form-tambah-siswa";
-import { checkUserRole } from "@/app/app-utils/auth";
+import { checkUserRole, logout } from "@/app/app-utils/auth";
 import { Separator } from "@/components/ui/separator";
 import FormUpdateSiswa from "./components/form-update-siswa";
+import { useRouter } from "next/navigation";
+import { DateTime } from "luxon";
 
 const SiswaScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +67,11 @@ const SiswaScreen = () => {
     },
   ]);
   const role = checkUserRole();
+  const route = useRouter();
+
+  const formattedBirthDate = DateTime.fromISO(siswa.tanggal_lahir)
+    .setZone("Asia/Jakarta")
+    .toFormat("dd-MM-yyyy");
 
   useEffect(() => {
     let ignore = false;
@@ -90,6 +97,17 @@ const SiswaScreen = () => {
   if (role === "ssw") {
     return (
       <section>
+        <Button
+          variant={"outline"}
+          onClick={() => {
+            logout();
+            route.push("/");
+          }}
+          className="mr-2 text-red-600 flex items-center gap-2 fixed right-4 bottom-4"
+        >
+          <LogOut size={14} className="text-red-600" />
+          <span>Keluar</span>
+        </Button>
         <div className="flex w-full h-full justify-between items-center">
           <h1 className="text-3xl">Selamat datang</h1>
           <div className="flex justify-center gap-1">
@@ -145,7 +163,7 @@ const SiswaScreen = () => {
                   </TableCell>
                   <TableCell>{siswa?.nisn}</TableCell>
                   <TableCell>{siswa?.tempat_lahir}</TableCell>
-                  <TableCell>{siswa?.tanggal_lahir}</TableCell>
+                  <TableCell>{formattedBirthDate}</TableCell>
                   <TableCell>{siswa.alamat ? siswa.alamat : "-"}</TableCell>
                   <TableCell>{siswa.kelas ? siswa.kelas : "-"}</TableCell>
                   <TableCell>{siswa.status ? siswa.status : "-"}</TableCell>
@@ -198,6 +216,15 @@ const SiswaScreen = () => {
                 />
               </SheetContent>
             </Sheet>
+          )}
+          {role === "kps" && (
+            <Button
+              className="flex gap-2 justify-center"
+              onClick={() => setRefetch(true)}
+            >
+              <FileCheck size={16} />
+              <span>Validasi</span>
+            </Button>
           )}
         </div>
       </div>

@@ -84,12 +84,6 @@ const AdminDashboard = ({ children }: any) => {
             route="perhitungan"
             onClick={() => router.push(`/dashboard/data/perhitungan`)}
           />
-          <DashboardItem
-            icon={<FileLineChart size={20} color="#a1a1aa" />}
-            text="Hasil akhir"
-            route="hasil-akhir"
-            onClick={() => router.push(`/dashboard/data/hasil-akhir`)}
-          />
           <Separator />
           <div
             className="flex items-center gap-4 p-8 h-14 my-2 text-red-800 rounded-lg cursor-pointer  hover:bg-red-300 hover:text-red-800"

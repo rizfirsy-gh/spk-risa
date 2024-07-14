@@ -46,7 +46,6 @@ const HasilAkhirScreen = () => {
     let ignore = false;
     setIsLoading(true);
     getDataHasilAkhir().then((result) => {
-      console.log("result", result);
       setIsLoading(false);
       if (!ignore && result.status === 200) {
         setDataHasilAkhir(result.data);

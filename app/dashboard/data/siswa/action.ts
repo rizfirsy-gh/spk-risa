@@ -20,6 +20,26 @@ export async function getDataSiswa() {
   }
 }
 
+export async function validateDataSiswa() {
+  try {
+    const token = getToken();
+    console.log("token", token);
+    const res = await fetch("http://localhost:4008/api/account-users/siswa", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const json = res.json();
+
+    console.log("json", json);
+
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function getSiswaByNisn() {
   try {
     const token = getToken();
