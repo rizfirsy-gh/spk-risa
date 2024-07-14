@@ -51,7 +51,7 @@ const KepalaSekolahScreen = () => {
         <p>Mendapatkan data...</p>
       ) : (
         dataKepalaSekolah.map((data, index) => (
-          <Card className="w-[400px]">
+          <Card key={index} className="w-[400px]">
             <CardHeader className="font-semibold text-md">
               {data.nama_kepsek === null ? "-" : data.nama_kepsek}
             </CardHeader>
