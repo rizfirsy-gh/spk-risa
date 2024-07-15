@@ -64,15 +64,14 @@ export default function Home() {
     <main className="grid grid-cols-2 min-h-screen">
       <section className="p-8 flex flex-col justify-between bg-zinc-200 dark:bg-zinc-800 relative">
         <div>
-          <h1 className="text-2xl mb-4">
+          <h1 className="text-xl mb-4">
             IMPLEMENTASI DECISION SUPPORT SYSTEM PENENTUAN PENERIMAAN BANTUAN
             UNTUK ANAK YATIM PIATU MENGGUNAKAN METODE PROMETHEE
           </h1>
           <h2 className="mb-4">(Studi Kasus : MI Raudlatul Athfal)</h2>
         </div>
         <div>
-          <h1 className="text-2xl mb-4">Risa Satifa (2010 1140 1387)</h1>
-          <h2 className="mb-4">Universitas Pamulang</h2>
+          <Image src={"/logo.png"} width={300} height={300} alt="logo" />
         </div>
       </section>
       <section className="p-8 grid place-content-center">

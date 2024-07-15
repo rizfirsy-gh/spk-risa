@@ -30,6 +30,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { logout } from "@/app/app-utils/auth";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const AdminDashboard = ({ children }: any) => {
   const router = useRouter();
@@ -85,18 +95,30 @@ const AdminDashboard = ({ children }: any) => {
             onClick={() => router.push(`/dashboard/data/perhitungan`)}
           />
           <Separator />
-          <div
-            className="flex items-center gap-4 p-8 h-14 my-2 text-red-800 rounded-lg cursor-pointer  hover:bg-red-300 hover:text-red-800"
-            onClick={() => {
-              logout();
-              router.push("/");
-            }}
-          >
-            <span className={"font-semibold text-zinc-500 dark:text-zinc-50"}>
-              <LogOut />
-            </span>
-            <p className="text-zinc-500 dark:text-zinc-300">Logout</p>
-          </div>
+          <AlertDialog>
+            <AlertDialogTrigger className="w-full flex items-center gap-4 p-8 h-14 my-2 text-red-800 rounded-lg cursor-pointer  hover:bg-red-300 hover:text-red-800">
+              <LogOut size={14} className="text-red-600" />
+              <span>Keluar</span>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Apakah anda yakin?</AlertDialogTitle>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Batal</AlertDialogCancel>
+                <AlertDialogAction
+                  className="flex gap-2"
+                  onClick={() => {
+                    logout();
+                    router.push("/");
+                  }}
+                >
+                  <LogOut size={14} className="text-zinc-50" />
+                  <span>Ya, Keluar</span>
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </ScrollArea>
       </ResizablePanel>
       <ResizableHandle withHandle />

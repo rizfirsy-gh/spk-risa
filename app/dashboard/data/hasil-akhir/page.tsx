@@ -62,7 +62,7 @@ const HasilAkhirScreen = () => {
   return (
     <section>
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl">Data Hasil Akhir</h1>
+        <h1 className="text-3xl my-4">Data Hasil Akhir</h1>
         <Button
           className="flex gap-2 justify-center"
           variant={"outline"}
@@ -74,11 +74,13 @@ const HasilAkhirScreen = () => {
       </div>
       {isLoading ? (
         <p>Mengambil data...</p>
-      ) : (
+      ) : dataHasilAkhir ? (
         <DataTableHasilAkhir
           columns={columnsHasilAkhir}
           data={dataHasilAkhir}
         />
+      ) : (
+        "Belum ada data yang di validasi"
       )}
     </section>
   );

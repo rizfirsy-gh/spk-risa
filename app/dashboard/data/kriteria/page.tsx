@@ -29,7 +29,7 @@ const KriteriaScreen = () => {
   const [refetch, setRefetch] = useState(false);
   const [dataKriteria, setDataKriteria] = useState([
     {
-      kode_kriteria: 0,
+      id_kriteria: 0,
       nama_kriteria: "",
       jenis: "",
       bobot: null,
@@ -84,9 +84,7 @@ const KriteriaScreen = () => {
                 dataKriteria.map((data, index) => (
                   <TableRow key={index}>
                     <TableCell className="font-medium text-center">
-                      {data.kode_kriteria === null
-                        ? "-"
-                        : "C" + data.kode_kriteria}
+                      {data.id_kriteria === null ? "-" : "K" + data.id_kriteria}
                     </TableCell>
                     <TableCell>
                       {data.nama_kriteria === null ? "-" : data.nama_kriteria}

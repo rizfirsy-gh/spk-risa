@@ -61,13 +61,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               </CardHeader>
             </Card>
           </Link>
-          <Link href={"dashboard/data/hasil-akhir"}>
-            <Card>
-              <CardHeader>
-                <CardTitle>Data Hasil Akhir</CardTitle>
-              </CardHeader>
-            </Card>
-          </Link>
         </section>
       </div>
     );
@@ -103,10 +96,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               </CardHeader>
             </Card>
           </Link>
-          <Link href={"dashboard/data/hasil-akhir"}>
+          <Link href={"dashboard/data/perhitungan"}>
             <Card>
               <CardHeader>
-                <CardTitle>Data Hasil Akhir</CardTitle>
+                <CardTitle>Data Perhitungan</CardTitle>
               </CardHeader>
             </Card>
           </Link>

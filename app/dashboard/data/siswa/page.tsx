@@ -37,6 +37,19 @@ import { Separator } from "@/components/ui/separator";
 import FormUpdateSiswa from "./components/form-update-siswa";
 import { useRouter } from "next/navigation";
 import { DateTime } from "luxon";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import Link from "next/link";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import HasilAkhirScreen from "../hasil-akhir/page";
 
 const SiswaScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -97,17 +110,35 @@ const SiswaScreen = () => {
   if (role === "ssw") {
     return (
       <section>
-        <Button
-          variant={"outline"}
-          onClick={() => {
-            logout();
-            route.push("/");
-          }}
-          className="mr-2 text-red-600 flex items-center gap-2 fixed right-4 bottom-4"
-        >
-          <LogOut size={14} className="text-red-600" />
-          <span>Keluar</span>
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger>
+            <Button
+              variant={"outline"}
+              className="text-red-600 flex items-center gap-2 fixed right-4 bottom-4"
+            >
+              <LogOut size={14} className="text-red-600" />
+              <span>Keluar</span>
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Apakah anda yakin?</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Batal</AlertDialogCancel>
+              <AlertDialogAction
+                className="flex gap-2"
+                onClick={() => {
+                  logout();
+                  route.push("/");
+                }}
+              >
+                <LogOut size={14} className="text-zinc-50" />
+                <span>Ya, Keluar</span>
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
         <div className="flex w-full h-full justify-between items-center">
           <h1 className="text-3xl">Selamat datang</h1>
           <div className="flex justify-center gap-1">
@@ -139,49 +170,60 @@ const SiswaScreen = () => {
           </div>
         </div>
         <Separator className="my-8" />
-        <Card>
-          <CardHeader>{siswa?.nama_siswa}</CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Nama</TableHead>
-                  <TableHead>NISN</TableHead>
-                  <TableHead>Tempat Lahir</TableHead>
-                  <TableHead>Tanggal Lahir</TableHead>
-                  <TableHead>Alamat</TableHead>
-                  <TableHead>Kelas</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Penghasilan Orang Tua</TableHead>
-                  <TableHead>Tanggungan Orang Tua</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    {siswa?.nama_siswa}
-                  </TableCell>
-                  <TableCell>{siswa?.nisn}</TableCell>
-                  <TableCell>{siswa?.tempat_lahir}</TableCell>
-                  <TableCell>{formattedBirthDate}</TableCell>
-                  <TableCell>{siswa.alamat ? siswa.alamat : "-"}</TableCell>
-                  <TableCell>{siswa.kelas ? siswa.kelas : "-"}</TableCell>
-                  <TableCell>{siswa.status ? siswa.status : "-"}</TableCell>
-                  <TableCell>
-                    {siswa.penghasilan_orang_tua
-                      ? siswa.penghasilan_orang_tua
-                      : "-"}
-                  </TableCell>
-                  <TableCell>
-                    {siswa.tanggungan_orang_tua
-                      ? siswa.tanggungan_orang_tua
-                      : "-"}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+        <Tabs defaultValue="siswa">
+          <TabsList>
+            <TabsTrigger value="siswa">Data Saya</TabsTrigger>
+            <TabsTrigger value="laporan">Hasil Laporan</TabsTrigger>
+          </TabsList>
+          <TabsContent value="siswa">
+            <Card>
+              <CardHeader>{siswa?.nama_siswa}</CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Nama</TableHead>
+                      <TableHead>NISN</TableHead>
+                      <TableHead>Tempat Lahir</TableHead>
+                      <TableHead>Tanggal Lahir</TableHead>
+                      <TableHead>Alamat</TableHead>
+                      <TableHead>Kelas</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Penghasilan Orang Tua</TableHead>
+                      <TableHead>Tanggungan Orang Tua</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">
+                        {siswa?.nama_siswa}
+                      </TableCell>
+                      <TableCell>{siswa?.nisn}</TableCell>
+                      <TableCell>{siswa?.tempat_lahir}</TableCell>
+                      <TableCell>{formattedBirthDate}</TableCell>
+                      <TableCell>{siswa.alamat ? siswa.alamat : "-"}</TableCell>
+                      <TableCell>{siswa.kelas ? siswa.kelas : "-"}</TableCell>
+                      <TableCell>{siswa.status ? siswa.status : "-"}</TableCell>
+                      <TableCell>
+                        {siswa.penghasilan_orang_tua
+                          ? siswa.penghasilan_orang_tua
+                          : "-"}
+                      </TableCell>
+                      <TableCell>
+                        {siswa.tanggungan_orang_tua
+                          ? siswa.tanggungan_orang_tua
+                          : "-"}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="laporan">
+            <HasilAkhirScreen />
+          </TabsContent>
+        </Tabs>
       </section>
     );
   }

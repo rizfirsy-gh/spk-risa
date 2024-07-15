@@ -3,7 +3,6 @@ import { getToken } from "@/app/app-utils/auth";
 export async function getDataHasilAkhir() {
   try {
     const token = getToken();
-    console.log("token", token);
     const res = await fetch(
       "http://localhost:4008/api/perhitungan/laporan-hasil",
       {
@@ -13,11 +12,7 @@ export async function getDataHasilAkhir() {
       }
     );
 
-    const json = res.json();
-
-    console.log("json", json);
-
-    return json;
+    return await res.json();
   } catch (error) {
     return error;
   }
