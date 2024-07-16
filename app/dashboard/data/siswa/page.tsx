@@ -55,7 +55,7 @@ const SiswaScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [addFormIsOpen, setAddFormIsOpen] = useState(false);
   const [refetch, setRefetch] = useState(false);
-  const [siswa, setSiswa] = useState<SiswaType>({
+  const [siswa, setSiswa] = useState<any>({
     nisn: "",
     nama_siswa: "",
     alamat: "",
@@ -93,12 +93,20 @@ const SiswaScreen = () => {
     if (role === "ssw") {
       getSiswaByNisn().then(({ data }) => {
         setIsLoading(false);
+
+        if (!data) {
+          setSiswa([]);
+        }
         setSiswa(data);
       });
     } else {
-      getDataSiswa().then((result) => {
+      getDataSiswa().then(({ data }) => {
         setIsLoading(false);
-        setDataSiswa(result.data);
+
+        if (!data) {
+          setDataSiswa([]);
+        }
+        setDataSiswa(data);
       });
     }
 
@@ -273,8 +281,14 @@ const SiswaScreen = () => {
       <div className="mx-4 my-8">
         {isLoading ? (
           <p>Mengambil data...</p>
+        ) : !dataSiswa ? (
+          <p>Data Kosong</p>
         ) : (
-          <DataTable columns={columnsSiswa} data={dataSiswa} />
+          <DataTable
+            columns={columnsSiswa}
+            data={dataSiswa}
+            onDeleteSuccess={() => setRefetch(true)}
+          />
         )}
       </div>
     </section>
