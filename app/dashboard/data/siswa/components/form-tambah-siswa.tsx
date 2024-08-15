@@ -30,7 +30,7 @@ import { addSiswa } from "../action";
 
 const formSchema = z.object({
   nisn: z.string().min(5).max(10),
-  nama_siswa: z.string().min(5),
+  nama_siswa: z.string().min(4),
   tempat_lahir: z.string().min(5),
   tanggal_lahir: z.date({
     required_error: "Tanggal Lahir belum dipilih",

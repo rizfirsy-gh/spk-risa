@@ -65,8 +65,9 @@ export default function Home() {
       <section className="p-8 flex flex-col justify-between bg-zinc-200 dark:bg-zinc-800 relative">
         <div>
           <h1 className="text-xl mb-4">
-            IMPLEMENTASI DECISION SUPPORT SYSTEM PENENTUAN PENERIMAAN BANTUAN
-            UNTUK ANAK YATIM PIATU MENGGUNAKAN METODE PROMETHEE
+            DECISION SUPPORT SYSTEM PENENTUAN PENERIMAAN BANTUAN UNTUK SISWA
+            KURANG MAMPU MENGGUNAKAN METODE PROMETHEE (Studi Kasus : MI
+            Raudlatul Athfal)
           </h1>
           <h2 className="mb-4">(Studi Kasus : MI Raudlatul Athfal)</h2>
         </div>

@@ -196,7 +196,6 @@ const SiswaScreen = () => {
                       <TableHead>Tanggal Lahir</TableHead>
                       <TableHead>Alamat</TableHead>
                       <TableHead>Kelas</TableHead>
-                      <TableHead>Status</TableHead>
                       <TableHead>Penghasilan Orang Tua</TableHead>
                       <TableHead>Tanggungan Orang Tua</TableHead>
                     </TableRow>
@@ -211,7 +210,6 @@ const SiswaScreen = () => {
                       <TableCell>{formattedBirthDate}</TableCell>
                       <TableCell>{siswa.alamat ? siswa.alamat : "-"}</TableCell>
                       <TableCell>{siswa.kelas ? siswa.kelas : "-"}</TableCell>
-                      <TableCell>{siswa.status ? siswa.status : "-"}</TableCell>
                       <TableCell>
                         {siswa.penghasilan_orang_tua
                           ? siswa.penghasilan_orang_tua
